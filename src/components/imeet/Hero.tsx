@@ -12,7 +12,7 @@ const PAINTING_FRAME =
 const SCENE_BOX = "animate-scene-in pointer-events-none absolute inset-x-0 top-0 h-[680px] md:h-full";
 const PARALLAX_BOX = "parallax absolute will-change-transform -inset-[4%] [container-type:size] lg:-inset-x-[1%] lg:-inset-y-[1%]";
 
-// hill.webp is 1024x1536; the samurai is positioned in % of this box
+// cherry-cliff.webp is 1024x1536; the samurai is positioned in % of this box
 const HILL_BOX =
   "absolute bottom-0 left-0 aspect-[1024/1536] h-[min(105cqh,135cqw)] md:h-[min(132cqh,135cqw)] lg:h-[min(136cqh,175cqw)]";
 
@@ -59,7 +59,7 @@ export default function Hero() {
       <div className={SCENE_BOX}>
         <div className={PARALLAX_BOX} data-depth="0" data-scroll="0.3">
           <div className={HILL_BOX}>
-            <img src="/imeet/hill.webp" alt="" aria-hidden="true" className="h-full w-full" />
+            <img src="/imeet/cherry-cliff.webp" alt="" aria-hidden="true" className="h-full w-full" />
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function Hero() {
 
       <div className={SCENE_BOX}>
         <div
-          className={`${PARALLAX_BOX} [-webkit-mask-composite:xor] [-webkit-mask-image:linear-gradient(#000,#000),url('/imeet/hill.webp')] [-webkit-mask-position:0_0,left_bottom] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:100%_100%,90%_auto] [mask-composite:exclude] [mask-image:linear-gradient(#000,#000),url('/imeet/hill.webp')] [mask-position:0_0,left_bottom] [mask-repeat:no-repeat] [mask-size:100%_100%,90%_auto] md:[-webkit-mask-size:100%_100%,auto_132%] md:[mask-size:100%_100%,auto_132%] lg:[-webkit-mask-size:100%_100%,auto_136%] lg:[mask-size:100%_100%,auto_136%]`}
+          className={`${PARALLAX_BOX} [-webkit-mask-composite:xor] [-webkit-mask-image:linear-gradient(#000,#000),url('/imeet/cherry-cliff.webp')] [-webkit-mask-position:0_0,left_bottom] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:100%_100%,90%_auto] [mask-composite:exclude] [mask-image:linear-gradient(#000,#000),url('/imeet/cherry-cliff.webp')] [mask-position:0_0,left_bottom] [mask-repeat:no-repeat] [mask-size:100%_100%,90%_auto] md:[-webkit-mask-size:100%_100%,auto_132%] md:[mask-size:100%_100%,auto_132%] lg:[-webkit-mask-size:100%_100%,auto_136%] lg:[mask-size:100%_100%,auto_136%]`}
           data-depth="10"
           data-scroll="0.3"
         >
