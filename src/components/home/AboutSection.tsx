@@ -33,15 +33,10 @@ export default function About() {
               {/* outer edge only: the stroke is painted under a dark fill, so the font's inner overlaps stay hidden */}
               <span className="text-[#0a0e18] [-webkit-text-stroke:3px_rgba(220,229,241,0.7)] [paint-order:stroke_fill]">IMEET</span>
             </h2>
-            <div className="mt-12 grid gap-8 md:grid-cols-12">
-              <h3 className="js-reveal [&.is-in]:animate-reveal font-nav text-2xl font-bold leading-snug tracking-[0.18em] text-vermilion md:col-span-5 md:text-[28px]">
-                WHERE IDEAS FIND THEIR COURAGE.
-              </h3>
-              <p className="js-reveal [&.is-in]:animate-reveal text-lg font-light leading-relaxed text-moon/75 md:col-span-7 md:text-xl md:leading-7">
-                “IMEET brings together curious minds, creative thinkers, and future innovators to explore ideas,
-                challenge boundaries, and build something meaningful.”
-              </p>
-            </div>
+            <p className="js-reveal [&.is-in]:animate-reveal mt-10 max-w-2xl text-lg font-light leading-relaxed text-moon/75 md:text-xl md:leading-8">
+              “IMEET brings together curious minds, creative thinkers, and future innovators to explore ideas, challenge
+              boundaries, and build something meaningful.”
+            </p>
           </div>
         </div>
       </div>
