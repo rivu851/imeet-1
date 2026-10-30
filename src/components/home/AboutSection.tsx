@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
 import SectionBackdrop from "./SectionBackdrop";
-import { TEXT_OUTLINE } from "./styles";
 
 export default function About() {
   return (
@@ -11,7 +10,7 @@ export default function About() {
         src="/images/imeet/samurai.webp"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-[-7%] hidden h-[88%] w-auto opacity-60 xl:right-[-2%] drop-shadow-[0_0_60px_rgba(197,42,44,0.25)] [mask-image:linear-gradient(to_bottom,#000_55%,transparent_98%)] lg:block"
+        className="pointer-events-none absolute bottom-0 right-[-11%] h-[88%] w-auto opacity-50 drop-shadow-[0_0_60px_rgba(197,42,44,0.25)] [mask-image:linear-gradient(to_bottom,#000_75%,transparent)] md:right-[-10%] md:[mask-image:linear-gradient(to_bottom,#000_55%,transparent_98%)] md:h-[78%] md:w-auto md:opacity-45 lg:right-[-7%] lg:h-[88%] lg:opacity-60 xl:right-[-2%]"
       />
       <div id="about-dust" className="pointer-events-none absolute inset-0"></div>
       <div className="pointer-events-none absolute -right-[8%] bottom-[-10%] h-[600px] w-[600px] bg-[radial-gradient(circle,rgba(197,42,44,0.16),transparent_65%)]"></div>
@@ -27,11 +26,12 @@ export default function About() {
           <div className="lg:col-span-10">
             <h2
               id="about-title"
-              className="js-reveal [&.is-in]:animate-reveal font-display text-[17vw] uppercase leading-[0.86] text-moon md:text-[12vw] lg:text-[8.6rem] xl:text-[10rem]"
+              className="js-reveal [&.is-in]:animate-reveal font-display text-[15vw] uppercase leading-[0.9] text-moon md:text-[10vw] lg:text-[7rem] xl:text-[8rem]"
             >
-              Beyond <span className={TEXT_OUTLINE}>the</span>
+              About
               <br />
-              <span className="inline-block lg:pl-[18%]">Horizon</span>
+              {/* outer edge only: the stroke is painted under a dark fill, so the font's inner overlaps stay hidden */}
+              <span className="text-[#0a0e18] [-webkit-text-stroke:3px_rgba(220,229,241,0.7)] [paint-order:stroke_fill]">IMEET</span>
             </h2>
             <div className="mt-12 grid gap-8 md:grid-cols-12">
               <h3 className="js-reveal [&.is-in]:animate-reveal font-nav text-2xl font-bold leading-snug tracking-[0.18em] text-vermilion md:col-span-5 md:text-[28px]">
