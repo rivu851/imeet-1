@@ -57,13 +57,13 @@ export default function HeroClouds() {
   return (
     <div
       ref={rootRef}
-      className="absolute inset-0 [mask-composite:intersect] [-webkit-mask-composite:source-in] [mask-image:linear-gradient(to_right,transparent_18%,#000_44%),linear-gradient(to_bottom,#000_30%,transparent_58%)] [-webkit-mask-image:linear-gradient(to_right,transparent_18%,#000_44%),linear-gradient(to_bottom,#000_30%,transparent_58%)]"
+      className="absolute inset-0 [mask-composite:intersect] [-webkit-mask-composite:source-in] [mask-image:linear-gradient(to_right,transparent_18%,#000_44%),linear-gradient(to_bottom,#000_30%,transparent_58%)] [-webkit-mask-image:linear-gradient(to_right,transparent_18%,#000_44%),linear-gradient(to_bottom,#000_30%,transparent_58%)] max-md:[mask-image:linear-gradient(to_right,transparent_4%,#000_34%),linear-gradient(to_bottom,#000_12%,transparent_76%)] max-md:[-webkit-mask-image:linear-gradient(to_right,transparent_4%,#000_34%),linear-gradient(to_bottom,#000_12%,transparent_76%)]"
       aria-hidden="true"
     >
-      <div className="absolute inset-x-0 -top-[6%] h-[52%] overflow-hidden opacity-30">
+      <div className="absolute inset-x-0 -top-[6%] h-[52%] overflow-hidden opacity-30 max-md:opacity-40">
         <Track trackRef={backRef} src={FAR_SRC} className="h-full" />
       </div>
-      <div className="absolute inset-x-0 top-0 h-[56%] overflow-hidden opacity-55">
+      <div className="absolute inset-x-0 top-0 h-[56%] overflow-hidden opacity-55 max-md:h-[68%] max-md:opacity-65">
         <Track trackRef={frontRef} src={NEAR_SRC} className="h-full" />
       </div>
     </div>

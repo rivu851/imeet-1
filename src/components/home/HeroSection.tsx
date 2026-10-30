@@ -9,12 +9,12 @@ import { GRAIN } from "./styles";
 const PAINTING_FRAME =
   "absolute left-[19%] top-1/2 [will-change:transform,scale] h-[max(100cqh,56.28cqw)] w-[max(100cqw,177.68cqh)] -translate-x-[19%] -translate-y-1/2 md:left-[24%] md:-translate-x-[24%] lg:left-1/2 lg:top-[max(calc(470*var(--u)+1cqh-0.38*max(100cqh,56.28cqw)),calc(100cqh-max(100cqh,56.28cqw)))] lg:-translate-x-1/2 lg:translate-y-0";
 
-const SCENE_BOX = "animate-scene-in pointer-events-none absolute inset-x-0 top-0 h-[680px] md:h-full";
+const SCENE_BOX = "animate-scene-in pointer-events-none absolute inset-x-0 top-0 h-full";
 const PARALLAX_BOX = "parallax absolute will-change-transform -inset-[4%] [container-type:size] lg:-inset-x-[1%] lg:-inset-y-[1%]";
 
 // cherry-cliff.webp is 1024x1536; the samurai is positioned in % of this box
 const HILL_BOX =
-  "absolute bottom-0 left-0 aspect-[1024/1536] h-[min(105cqh,135cqw)] md:h-[min(132cqh,135cqw)] lg:h-[min(136cqh,175cqw)]";
+  "absolute bottom-[8%] left-[-24%] aspect-[1024/1536] h-[min(105cqh,135cqw)] md:bottom-0 md:left-0 md:h-[min(132cqh,135cqw)] lg:h-[min(136cqh,175cqw)]";
 
 const MIST =
   "absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_60%,rgba(140,160,185,0.22),rgba(140,160,185,0)_70%)] animate-mist in-[.fx-off]:[animation-play-state:paused]";
@@ -22,14 +22,14 @@ const MIST =
 const DIAMOND = "size-[1.4vw] rotate-45 bg-red-hi [box-shadow:0_0_8px_rgba(208,40,43,0.55)] md:size-[calc(9*var(--u))]";
 const META_ITEM = "inline-flex items-center gap-[0.6em]";
 const BUTTON =
-  "group relative inline-flex h-[11vw] items-center justify-center gap-[0.8em] whitespace-nowrap px-[5vw] font-nav text-[3.6vw] font-bold tracking-[0.2em] text-ivory [clip-path:polygon(var(--cut)_0,100%_0,100%_calc(100%-var(--cut)),calc(100%-var(--cut))_100%,0_100%,0_var(--cut))] [text-shadow:none] [transition:background-color_0.3s_ease,filter_0.3s_ease,color_0.3s_ease] md:h-[calc(72*var(--u))] md:px-[calc(44*var(--u))] md:text-[calc(24*var(--u))]";
+  "group relative inline-flex h-[clamp(44px,12vw,52px)] w-[calc(50%-4px)] max-w-[180px] items-center justify-center gap-[0.6em] whitespace-nowrap px-2 font-nav text-[clamp(10px,3vw,13px)] font-bold tracking-[0.12em] text-ivory [clip-path:polygon(var(--cut)_0,100%_0,100%_calc(100%-var(--cut)),calc(100%-var(--cut))_100%,0_100%,0_var(--cut))] [text-shadow:none] [transition:background-color_0.3s_ease,filter_0.3s_ease,color_0.3s_ease] md:h-[calc(72*var(--u))] md:w-auto md:max-w-none md:gap-[0.8em] md:px-[calc(44*var(--u))] md:text-[calc(24*var(--u))] md:tracking-[0.2em]";
 const BUTTON_ICON = "fa-solid fa-arrow-right text-[0.8em] [transition:translate_0.3s_ease] [.group:hover_&]:[translate:0.3em_0]";
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative h-[900px] w-full overflow-hidden bg-midnight md:h-svh md:min-h-[620px]"
+      className="relative h-[100svh] min-h-[720px] max-h-[900px] w-full overflow-hidden bg-midnight md:h-svh md:min-h-[620px] md:max-h-none"
       aria-label="IMEET 2026"
     >
       <div id="layer-scene" className={SCENE_BOX}>
@@ -49,7 +49,7 @@ export default function Hero() {
       <div id="layer-clouds" className="parallax pointer-events-none absolute inset-0 will-change-transform" data-depth="7" data-scroll="0.4">
         <HeroClouds />
       </div>
-      <div className="animate-scene-in pointer-events-none absolute right-[6%] top-[84px] w-[18vw] md:right-[calc(570*var(--u))] md:top-[calc(118*var(--u))] md:w-[calc(150*var(--u))]">
+      <div className="animate-scene-in pointer-events-none absolute right-[8%] top-[27%] z-10 w-[clamp(64px,18vw,96px)] md:right-[calc(570*var(--u))] md:top-[calc(118*var(--u))] md:z-auto md:w-[calc(150*var(--u))]">
         <div className="parallax will-change-transform" data-depth="5" data-scroll="0.35">
           <img src="/images/imeet/moon-hero.webp" alt="" aria-hidden="true" className="h-auto w-full mix-blend-screen drop-shadow-[0_0_40px_rgba(170,200,255,0.35)] animate-moon-float in-[.fx-off]:[animation-play-state:paused]" />
         </div>
@@ -65,7 +65,7 @@ export default function Hero() {
       </div>
 
       <div className="pointer-events-none absolute inset-0 animate-title-in">
-        <div className="absolute left-1/2 top-[96px] flex w-[92vw] -translate-x-1/2 flex-col items-center gap-[8px] md:bottom-[calc(100%-490*var(--u))] md:left-auto md:right-[calc(70*var(--u))] md:top-auto md:w-[max(calc(100%-70*var(--u)-79svh),40vw)] md:translate-x-0 md:items-end md:gap-[calc(25*var(--u))]">
+        <div className="absolute left-1/2 top-[96px] flex w-[min(92vw,520px)] -translate-x-1/2 flex-col items-center gap-[8px] md:bottom-[calc(100%-490*var(--u))] md:left-auto md:right-[calc(70*var(--u))] md:top-auto md:w-[max(calc(100%-70*var(--u)-79svh),40vw)] md:translate-x-0 md:items-end md:gap-[calc(25*var(--u))]">
           <img src="/images/imeet/departmentofitwhite.png" alt="Departmental fest of IT" className="w-[62vw] md:w-[calc(465*var(--u))]" />
           <h1 className="m-0 w-full">
             <img src="/images/imeet/imeet-white.png" alt="IMEET 2026" className="w-full" />
@@ -129,28 +129,28 @@ export default function Hero() {
 
       <div
         id="hero-ui"
-        className="absolute inset-x-0 top-[200px] z-20 flex flex-col items-center gap-[7vw] px-[4vw] text-ivory [--cut:2.4vw] [text-shadow:0_2px_0_rgba(0,0,0,0.55),0_2px_16px_rgba(2,6,18,0.9)] animate-info-in md:inset-0 md:block md:p-0 md:[--cut:calc(14*var(--u))]"
+        className="absolute inset-x-0 bottom-5 z-40 flex flex-col items-center gap-4 px-4 text-ivory [--cut:10px] [text-shadow:0_2px_0_rgba(0,0,0,0.55),0_2px_16px_rgba(2,6,18,0.9)] animate-info-in sm:bottom-7 md:inset-0 md:block md:p-0 md:[--cut:calc(14*var(--u))]"
       >
-        <div className="flex flex-col items-center gap-[3vw] md:absolute md:right-[calc(70*var(--u))] md:top-[calc(528*var(--u))] md:items-end md:gap-[calc(22*var(--u))]">
-          <p className="m-0 flex items-center gap-[3vw] whitespace-nowrap font-display text-[4.6vw] leading-none tracking-[0.06em] md:gap-[calc(24*var(--u))] md:text-[calc(38*var(--u))]">
+        <div className="flex w-full flex-col items-center gap-2 md:absolute md:right-[calc(70*var(--u))] md:top-[calc(528*var(--u))] md:items-end md:gap-[calc(22*var(--u))]">
+          <p className="m-0 flex items-center gap-[2vw] whitespace-nowrap font-display text-[clamp(15px,4.2vw,19px)] leading-none tracking-[0.04em] sm:gap-[3vw] md:gap-[calc(24*var(--u))] md:text-[calc(38*var(--u))] md:tracking-[0.06em]">
             <span>INSPIRE</span>
             <i className={DIAMOND} aria-hidden="true"></i>
             <span>INNOVATE</span>
             <i className={DIAMOND} aria-hidden="true"></i>
             <span>IMPACT</span>
           </p>
-          <p className="m-0 flex items-center gap-[3vw] whitespace-nowrap font-nav text-[3.4vw] font-semibold tracking-[0.18em] text-muted md:gap-[calc(24*var(--u))] md:text-[calc(25*var(--u))]">
+          <p className="m-0 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-nav text-[clamp(10px,2.8vw,13px)] font-semibold tracking-[0.1em] text-muted md:flex-nowrap md:justify-start md:gap-[calc(24*var(--u))] md:whitespace-nowrap md:text-[calc(25*var(--u))] md:tracking-[0.18em]">
             <span className={META_ITEM}>
               <i className="fa-regular fa-calendar text-red-hi" aria-hidden="true"></i>19–20 NOV 2026
             </span>
-            <span className={`${META_ITEM} h-[1.2em] w-px bg-line`} aria-hidden="true"></span>
+            <span className={`${META_ITEM} hidden h-[1.2em] w-px bg-line md:inline-flex`} aria-hidden="true"></span>
             <span className={META_ITEM}>
               <i className="fa-solid fa-location-dot text-red-hi" aria-hidden="true"></i>RCCIIT, KOLKATA
             </span>
           </p>
         </div>
 
-        <div className="flex items-center gap-[3vw] md:absolute md:right-[calc(70*var(--u))] md:top-[calc(672*var(--u))] md:gap-[calc(18*var(--u))]">
+        <div className="flex w-full items-center justify-center gap-2 md:absolute md:right-[calc(70*var(--u))] md:top-[calc(672*var(--u))] md:w-auto md:justify-start md:gap-[calc(18*var(--u))]">
           <a
             href="#"
             className={`${BUTTON} bg-[linear-gradient(180deg,#d0282b,#a8181b_55%,#5e090b)] [filter:drop-shadow(0_6px_16px_rgba(120,12,14,0.55))] [&:hover]:[filter:drop-shadow(0_6px_22px_rgba(208,40,43,0.6))_brightness(1.12)]`}
