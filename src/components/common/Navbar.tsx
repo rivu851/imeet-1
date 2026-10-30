@@ -55,7 +55,7 @@ export default function Header() {
           id="nav-links"
           className={`absolute inset-x-0 top-full ${
             menuOpen ? "flex" : "hidden"
-          } flex-col border-y border-moon/10 bg-midnight/95 px-6 py-3 text-lg text-white backdrop-blur-md [font-family:var(--font-shuriken),var(--font-anton),sans-serif] lg:absolute lg:inset-x-auto lg:left-[calc(470*var(--u))] lg:top-1/2 lg:flex lg:-translate-y-1/2 lg:flex-row lg:items-center lg:gap-[calc(100*var(--u))] lg:border-0 lg:bg-transparent lg:p-0 lg:text-[calc(24*var(--u))] lg:backdrop-blur-none`}
+          } flex-col border-y border-moon/10 bg-midnight/95 px-6 py-3 text-lg text-white backdrop-blur-md [font-family:var(--font-shuriken),var(--font-anton),sans-serif] lg:absolute lg:left-[calc(470*var(--u))] lg:right-[calc(70*var(--u))] lg:top-1/2 lg:flex lg:-translate-y-1/2 lg:flex-row lg:items-center lg:justify-between lg:gap-[calc(24*var(--u))] lg:border-0 lg:bg-transparent lg:p-0 lg:text-[calc(24*var(--u))] lg:backdrop-blur-none`}
         >
           {LINKS.map((link) => (
             <li key={link.label} className="border-b border-moon/10 py-4 lg:border-0 lg:py-0">
@@ -68,12 +68,12 @@ export default function Header() {
         <button
           id="menu-toggle"
           onClick={() => setMenuOpen((open) => !open)}
-          className="flex h-11 w-11 items-center justify-center border border-moon/25 text-moon transition-colors hover:border-vermilion lg:hidden"
+          className="flex h-11 w-11 items-center justify-center text-moon transition-colors hover:text-vermilion lg:hidden"
           aria-expanded={menuOpen}
           aria-controls="nav-links"
           aria-label="Open menu"
         >
-          <i className={menuOpen ? "fa-solid fa-xmark text-sm" : "fa-solid fa-bars-staggered text-sm"}></i>
+          <i className={menuOpen ? "fa-solid fa-xmark text-2xl" : "fa-solid fa-bars text-2xl"}></i>
         </button>
       </nav>
     </header>

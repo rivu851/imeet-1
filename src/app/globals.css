@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* The hero switches between its portrait and landscape layouts by the screen's
+   shape, not its width, so tall screens of any width get the portrait layout. */
+@custom-variant hero-wide (@media (min-aspect-ratio: 1/1));
+@custom-variant hero-lg (@media (min-aspect-ratio: 1/1) and (min-width: 64rem));
+
 @theme inline {
   --color-midnight: #080b14;
   --color-navy: #111b2a;
@@ -96,6 +101,9 @@
   :root {
     /* 1u = 1px of the 1920x1080 design */
     --u: min(calc(100vw / 1920), calc(100svh / 1080));
+    /* hero portrait layout: 1vw on phones, but no more than a 9:16 screen's
+       1vw on wider portrait screens (tablets), so it keeps a phone's proportions */
+    --pu: min(1vw, calc(max(100svh, 640px) * 0.005625));
     --image-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 

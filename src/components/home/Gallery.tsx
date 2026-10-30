@@ -8,14 +8,15 @@ import SectionBackdrop from "./SectionBackdrop";
 import { TEXT_OUTLINE } from "./styles";
 
 const IMG = "/images/imeet/";
+const EVENT_IMG = "/images/events/";
 
 const FRAMES = [
   { src: `${IMG}valley.jpg`, alt: "Placeholder artwork: moonlit valley", size: "col-span-2 h-[260px] md:col-span-8 md:h-[480px]" },
   { src: `${IMG}lanterns.jpg`, alt: "Placeholder artwork: lanterns", size: "col-span-1 h-[220px] md:col-span-4 md:h-[480px]" },
-  { src: `${IMG}workshop.jpg`, alt: "Placeholder artwork: workshop", size: "col-span-1 h-[220px] md:col-span-4 md:h-[340px]" },
+  { src: `${EVENT_IMG}workshop.jpg`, alt: "Placeholder artwork: workshop", size: "col-span-1 h-[220px] md:col-span-4 md:h-[340px]" },
   { src: `${IMG}torii.jpg`, alt: "Placeholder artwork: torii in mist", size: "col-span-2 h-[220px] md:col-span-5 md:h-[340px]" },
-  { src: `${IMG}scroll.jpg`, alt: "Placeholder artwork: scroll and lantern", size: "col-span-1 h-[220px] md:col-span-3 md:h-[340px]" },
-  { src: `${IMG}courtyard.jpg`, alt: "Placeholder artwork: lantern courtyard", size: "col-span-1 h-[220px] md:col-span-12 md:h-[300px]" },
+  { src: `${EVENT_IMG}scroll.jpg`, alt: "Placeholder artwork: scroll and lantern", size: "col-span-1 h-[220px] md:col-span-3 md:h-[340px]" },
+  { src: `${EVENT_IMG}courtyard.jpg`, alt: "Placeholder artwork: lantern courtyard", size: "col-span-1 h-[220px] md:col-span-12 md:h-[300px]" },
 ];
 
 const wrap = (i: number) => (i + FRAMES.length) % FRAMES.length;

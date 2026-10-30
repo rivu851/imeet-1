@@ -271,7 +271,7 @@ export default function PillarsStack() {
                   </span>
                 </div>
                 <h3
-                  className={`mt-4 font-display text-[19vw] uppercase leading-[0.82] transition-transform duration-700 ease-out group-hover:translate-x-2 md:text-[9vw] lg:text-[9.5rem] ${p.titleClass}`}
+                  className={`mt-4 font-display text-[13vw] uppercase leading-[0.82] transition-transform duration-700 ease-out group-hover:translate-x-2 md:text-[9vw] lg:text-[9.5rem] ${p.titleClass}`}
                 >
                   {p.title}
                 </h3>

@@ -114,7 +114,7 @@ export default function Events() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight via-midnight/45 to-transparent"></div>
             <div className="absolute inset-x-0 bottom-0 p-6 transition-transform duration-700 group-hover:-translate-y-1 md:p-9">
               <Category n="01" />
-              <h3 className="mt-3 font-display text-4xl uppercase leading-none text-moon md:text-6xl">Technical Competitions</h3>
+              <h3 className="mt-3 font-display text-[8.6vw] uppercase leading-none text-moon sm:text-4xl md:text-6xl">Technical Competitions</h3>
               <p className="mt-2 font-nav text-xs font-semibold tracking-[0.3em] text-amber">EVENT NAMES TO BE ANNOUNCED</p>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-moon/70">
                 Contests of skill and strategy that test problem-solving, precision and engineering instinct.
@@ -143,7 +143,7 @@ export default function Events() {
             </div>
             <div className="flex flex-1 flex-col p-6 md:p-8">
               <Category n="02" />
-              <h3 className="mt-3 font-display text-4xl uppercase leading-none text-moon">Coding Challenges</h3>
+              <h3 className="mt-3 font-display text-[8.6vw] uppercase leading-none text-moon sm:text-4xl">Coding Challenges</h3>
               <p className="mt-2 font-nav text-xs font-semibold tracking-[0.3em] text-amber">EVENT NAMES TO BE ANNOUNCED</p>
               <p className="mt-4 text-sm leading-relaxed text-moon/70">
                 Timed programming challenges for those who think in logic and write with clarity.
@@ -173,7 +173,7 @@ export default function Events() {
             <div className="relative flex flex-col justify-center p-6 md:col-span-5 md:p-12">
               <span className={`font-display text-8xl leading-none ${TEXT_OUTLINE_RED}`}>03</span>
               <p className="mt-4 font-nav text-[11px] font-bold tracking-[0.4em] text-vermilion">CATEGORY · 03</p>
-              <h3 className="mt-3 font-display text-4xl uppercase leading-none text-moon md:text-5xl">Project Showcases</h3>
+              <h3 className="mt-3 font-display text-[8.6vw] uppercase leading-none text-moon sm:text-4xl md:text-5xl">Project Showcases</h3>
               <p className="mt-2 font-nav text-xs font-semibold tracking-[0.3em] text-amber">EVENT NAMES TO BE ANNOUNCED</p>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-moon/70">
                 A stage for original student projects, prototypes and ideas ready to meet the world.
@@ -200,7 +200,7 @@ export default function Events() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight via-midnight/50 to-transparent"></div>
             <div className="absolute inset-x-0 bottom-0 p-6 transition-transform duration-700 group-hover:-translate-y-1 md:p-8">
               <Category n="04" />
-              <h3 className="mt-3 font-display text-4xl uppercase leading-none text-moon">Workshops</h3>
+              <h3 className="mt-3 font-display text-[8.6vw] uppercase leading-none text-moon sm:text-4xl">Workshops</h3>
               <p className="mt-2 font-nav text-xs font-semibold tracking-[0.3em] text-amber">EVENT NAMES TO BE ANNOUNCED</p>
               <p className="mt-3 text-sm leading-relaxed text-moon/70">
                 Hands-on sessions to learn new tools, techniques and ways of building.
@@ -225,7 +225,7 @@ export default function Events() {
               <p className="mt-4 font-nav text-[11px] font-bold tracking-[0.4em] text-vermilion">CATEGORY · 05</p>
             </div>
             <div>
-              <h3 className="font-display text-4xl uppercase leading-none text-moon">Talks</h3>
+              <h3 className="font-display text-[8.6vw] uppercase leading-none text-moon sm:text-4xl">Talks</h3>
               <p className="mt-2 font-nav text-xs font-semibold tracking-[0.3em] text-amber">SPEAKERS TO BE ANNOUNCED</p>
               <p className="mt-3 text-sm leading-relaxed text-moon/70">
                 Sessions that open new perspectives on technology and where it is headed.
@@ -252,7 +252,7 @@ export default function Events() {
               <p className="mt-4 font-nav text-[11px] font-bold tracking-[0.4em] text-vermilion">CATEGORY · 06</p>
             </div>
             <div>
-              <h3 className="font-display text-4xl uppercase leading-none text-moon">Festival Activities</h3>
+              <h3 className="font-display text-[8.6vw] uppercase leading-none text-moon sm:text-4xl">Festival Activities</h3>
               <p className="mt-2 font-nav text-xs font-semibold tracking-[0.3em] text-amber">DETAILS TO BE ANNOUNCED</p>
               <p className="mt-3 text-sm leading-relaxed text-moon/70">
                 Moments of play, culture and community beyond the competitions.

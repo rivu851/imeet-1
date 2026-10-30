@@ -21,7 +21,7 @@ export default async function EventDetailsPage({
   return (
     <PageShell>
       <main className="min-h-screen px-6 pb-24 pt-32 text-moon md:px-10 lg:px-14 lg:pt-48">
-        <article className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
+        <article className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
           <div className="relative aspect-[4/3] overflow-hidden border border-moon/10">
             <Image src={event.image} alt="" fill priority className="object-cover" sizes="(min-width: 768px) 50vw, 100vw" />
           </div>
@@ -29,7 +29,7 @@ export default async function EventDetailsPage({
             <p className="font-nav text-xs font-bold uppercase tracking-[0.4em] text-vermilion">
               IMEET 2026 · {event.category}
             </p>
-            <h1 className="mt-5 font-display text-5xl uppercase leading-tight md:text-7xl">{event.title}</h1>
+            <h1 className="mt-5 font-display text-[10vw] uppercase leading-tight sm:text-5xl md:text-7xl">{event.title}</h1>
             <p className="mt-6 text-lg leading-relaxed text-moon/75">{event.description}</p>
             <p className="mt-8 border-t border-moon/10 pt-5 font-nav text-sm font-bold tracking-[0.25em]">
               SCHEDULE · {event.schedule}

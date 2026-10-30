@@ -64,7 +64,7 @@ export default function Countdown() {
         <p className="js-reveal [&.is-in]:animate-reveal flex items-center justify-center gap-4 font-nav text-xs font-bold tracking-[0.45em] text-vermilion">
           <span className="h-px w-10 bg-vermilion/70"></span>04 · THE HOUR<span className="h-px w-10 bg-vermilion/70"></span>
         </p>
-        <h2 className="js-reveal [&.is-in]:animate-reveal mt-6 font-display text-[13vw] uppercase leading-[0.9] text-moon md:text-7xl md:leading-none lg:text-[7.5rem]">
+        <h2 className="js-reveal [&.is-in]:animate-reveal mt-6 font-display text-[10.5vw] uppercase leading-[0.9] text-moon md:text-7xl md:leading-none lg:text-[7.5rem]">
           The moment approaches.
         </h2>
         <div id="countdown-grid" className="js-reveal [&.is-in]:animate-reveal mx-auto mt-16 grid max-w-6xl grid-cols-2 md:grid-cols-4">
