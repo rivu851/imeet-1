@@ -37,7 +37,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-[rgb(2,18,47)]"></div>
           <div className={PAINTING_FRAME} data-hero-zoom>
             <img
-              src="/imeet/hero.webp"
+              src="/images/banners/hero.webp"
               alt="Hand-painted night valley under a starry sky, with a river and village lights"
               className="h-full w-full"
             />
@@ -51,7 +51,7 @@ export default function Hero() {
       </div>
       <div className="animate-scene-in pointer-events-none absolute right-[6%] top-[84px] w-[18vw] md:right-[calc(570*var(--u))] md:top-[calc(118*var(--u))] md:w-[calc(150*var(--u))]">
         <div className="parallax will-change-transform" data-depth="5" data-scroll="0.35">
-          <img src="/imeet/moon-hero.webp" alt="" aria-hidden="true" className="h-auto w-full mix-blend-screen drop-shadow-[0_0_40px_rgba(170,200,255,0.35)] animate-moon-float in-[.fx-off]:[animation-play-state:paused]" />
+          <img src="/images/imeet/moon-hero.webp" alt="" aria-hidden="true" className="h-auto w-full mix-blend-screen drop-shadow-[0_0_40px_rgba(170,200,255,0.35)] animate-moon-float in-[.fx-off]:[animation-play-state:paused]" />
         </div>
       </div>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-midnight/80 via-midnight/30 to-transparent"></div>
@@ -59,28 +59,28 @@ export default function Hero() {
       <div className={SCENE_BOX}>
         <div className={PARALLAX_BOX} data-depth="0" data-scroll="0.3">
           <div className={HILL_BOX}>
-            <img src="/imeet/cherry-cliff.webp" alt="" aria-hidden="true" className="h-full w-full" />
+            <img src="/images/imeet/cherry-cliff.webp" alt="" aria-hidden="true" className="h-full w-full" />
           </div>
         </div>
       </div>
 
       <div className="pointer-events-none absolute inset-0 animate-title-in">
         <div className="absolute left-1/2 top-[96px] flex w-[92vw] -translate-x-1/2 flex-col items-center gap-[8px] md:bottom-[calc(100%-490*var(--u))] md:left-auto md:right-[calc(70*var(--u))] md:top-auto md:w-[max(calc(100%-70*var(--u)-79svh),40vw)] md:translate-x-0 md:items-end md:gap-[calc(25*var(--u))]">
-          <img src="/imeet/departmentofitwhite.png" alt="Departmental fest of IT" className="w-[62vw] md:w-[calc(465*var(--u))]" />
+          <img src="/images/imeet/departmentofitwhite.png" alt="Departmental fest of IT" className="w-[62vw] md:w-[calc(465*var(--u))]" />
           <h1 className="m-0 w-full">
-            <img src="/imeet/imeet-white.png" alt="IMEET 2026" className="w-full" />
+            <img src="/images/imeet/imeet-white.png" alt="IMEET 2026" className="w-full" />
           </h1>
         </div>
       </div>
 
       <div className={SCENE_BOX}>
         <div
-          className={`${PARALLAX_BOX} [-webkit-mask-composite:xor] [-webkit-mask-image:linear-gradient(#000,#000),url('/imeet/cherry-cliff.webp')] [-webkit-mask-position:0_0,left_bottom] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:100%_100%,90%_auto] [mask-composite:exclude] [mask-image:linear-gradient(#000,#000),url('/imeet/cherry-cliff.webp')] [mask-position:0_0,left_bottom] [mask-repeat:no-repeat] [mask-size:100%_100%,90%_auto] md:[-webkit-mask-size:100%_100%,auto_132%] md:[mask-size:100%_100%,auto_132%] lg:[-webkit-mask-size:100%_100%,auto_136%] lg:[mask-size:100%_100%,auto_136%]`}
+          className={`${PARALLAX_BOX} [-webkit-mask-composite:xor] [-webkit-mask-image:linear-gradient(#000,#000),url('/images/imeet/cherry-cliff.webp')] [-webkit-mask-position:0_0,left_bottom] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:100%_100%,90%_auto] [mask-composite:exclude] [mask-image:linear-gradient(#000,#000),url('/images/imeet/cherry-cliff.webp')] [mask-position:0_0,left_bottom] [mask-repeat:no-repeat] [mask-size:100%_100%,90%_auto] md:[-webkit-mask-size:100%_100%,auto_132%] md:[mask-size:100%_100%,auto_132%] lg:[-webkit-mask-size:100%_100%,auto_136%] lg:[mask-size:100%_100%,auto_136%]`}
           data-depth="10"
           data-scroll="0.3"
         >
           <div className={PAINTING_FRAME} data-hero-zoom>
-            <img src="/imeet/mountain-layer.webp" alt="" aria-hidden="true" className="h-full w-full" />
+            <img src="/images/imeet/mountain-layer.webp" alt="" aria-hidden="true" className="h-full w-full" />
           </div>
         </div>
       </div>

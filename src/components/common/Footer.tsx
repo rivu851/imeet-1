@@ -92,7 +92,7 @@ export default function Footer() {
         </div>
 
         <a href="#hero" aria-label="IMEET, back to top" className="mt-24 flex items-end gap-[4.5vw] md:mt-[14.5vw]">
-          <img src="/imeet/logo.svg" alt="" className="-mb-[1.2vw] h-[21vw] w-[21vw] shrink-0" />
+          <img src="/images/imeet/logo.svg" alt="" className="-mb-[1.2vw] h-[21vw] w-[21vw] shrink-0" />
           <FooterWordmark />
         </a>
 

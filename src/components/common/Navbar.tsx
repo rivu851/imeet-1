@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const LINKS = [
-  { href: "#hero", label: "HOME" },
-  { href: "#about", label: "ABOUT IMEET" },
-  { href: "#hods-desk", label: "HOD'S DESK" },
-  { href: "#events", label: "EVENTS" },
-  { href: "#gallery", label: "GALLERY" },
-  { href: "#", label: "SIGN IN" },
+  { href: "/", label: "HOME" },
+  { href: "/about", label: "ABOUT IMEET" },
+  { href: "/hod-desk", label: "HOD'S DESK" },
+  { href: "/events", label: "EVENTS" },
+  { href: "/#gallery", label: "GALLERY" },
+  { href: "/signup", label: "SIGN UP" },
+  { href: "/contact", label: "CONTACT" },
 ];
 
 export default function Header() {
@@ -45,10 +47,10 @@ export default function Header() {
         className="relative flex h-20 w-full items-center justify-between px-6 md:px-10 lg:h-[calc(165*var(--u))] lg:px-[calc(40*var(--u))]"
         aria-label="Primary"
       >
-        <a id="logo-slot" href="#hero" className="flex items-center" aria-label="IMEET home">
+        <Link id="logo-slot" href="/" className="flex items-center" aria-label="IMEET home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/imeet/logo.svg" alt="IMEET" className="h-14 w-14 lg:h-[calc(100*var(--u))] lg:w-[calc(100*var(--u))]" />
-        </a>
+          <img src="/images/imeet/logo.svg" alt="IMEET" className="h-14 w-14 lg:h-[calc(100*var(--u))] lg:w-[calc(100*var(--u))]" />
+        </Link>
         <ul
           id="nav-links"
           className={`absolute inset-x-0 top-full ${
@@ -57,9 +59,9 @@ export default function Header() {
         >
           {LINKS.map((link) => (
             <li key={link.label} className="border-b border-moon/10 py-4 lg:border-0 lg:py-0">
-              <a href={link.href} onClick={closeOnMobile} className="whitespace-nowrap transition-colors hover:text-[#ff2a1f]">
+              <Link href={link.href} onClick={closeOnMobile} className="whitespace-nowrap transition-colors hover:text-[#ff2a1f]">
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

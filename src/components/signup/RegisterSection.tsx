@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { GRAIN } from "./styles";
+import { GRAIN } from "../home/styles";
 
 export default function Register() {
   return (
     <section id="register" className="relative h-[780px] overflow-hidden md:h-[840px]">
       <img
         data-speed="-0.05"
-        src="/imeet/stairway.jpg"
+        src="/images/imeet/stairway.jpg"
         alt="Lantern-lit stone stairway climbing toward a torii gate beneath a crescent moon"
         className="absolute inset-0 h-full w-full object-cover object-[60%_50%]"
       />

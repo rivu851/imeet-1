@@ -21,7 +21,7 @@ export default function SamuraiVideo({ className = "" }: { className?: string })
   return (
     <video
       ref={ref}
-      src="/imeet/samurai_video.webm"
+      src="/media/samurai_video.webm"
       muted
       loop
       playsInline

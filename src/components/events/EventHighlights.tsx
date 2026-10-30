@@ -3,8 +3,9 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useState } from "react";
-import SectionBackdrop from "./SectionBackdrop";
-import { TEXT_OUTLINE_RED } from "./styles";
+import Link from "next/link";
+import SectionBackdrop from "../home/SectionBackdrop";
+import { TEXT_OUTLINE_RED } from "../home/styles";
 
 const FILTERS = [
   { id: "all", label: "ALL" },
@@ -47,7 +48,7 @@ export default function Events() {
 
   return (
     <section id="events" className="relative overflow-clip bg-midnight py-24 md:py-32">
-      <SectionBackdrop sticky src="/imeet/valley.jpg" opacity={0.45} />
+      <SectionBackdrop sticky src="/images/imeet/valley.jpg" opacity={0.45} />
       <div className="pointer-events-none absolute -left-[12%] top-[20%] h-[800px] w-[800px] bg-[radial-gradient(circle,rgba(197,42,44,0.13),transparent_65%)]"></div>
       <div className="pointer-events-none absolute -right-[10%] bottom-[5%] h-[700px] w-[700px] bg-[radial-gradient(circle,rgba(216,183,122,0.09),transparent_65%)]"></div>
       <div data-petals="10" className="pointer-events-none absolute inset-0 overflow-hidden"></div>
@@ -106,7 +107,7 @@ export default function Events() {
             className={`event-card js-reveal [&.is-in]:animate-reveal group relative h-[520px] overflow-hidden bg-navy md:col-span-6 lg:col-span-7 lg:h-[580px] ${hide("technical")}`}
           >
             <img
-              src="/imeet/bridge.jpg"
+              src="/images/events/bridge.jpg"
               alt="Two samurai silhouettes facing each other on a misty moonlit bridge"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
             />
@@ -120,9 +121,9 @@ export default function Events() {
               </p>
               <div className="mt-6 flex flex-wrap items-end justify-between gap-4 border-t border-moon/15 pt-5">
                 <Meta />
-                <a href="#" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
+                <Link href="/events/technical-competitions" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
                   EVENT DETAILS {ARROW}
-                </a>
+                </Link>
               </div>
             </div>
           </article>
@@ -134,7 +135,7 @@ export default function Events() {
           >
             <div className="relative h-[260px] overflow-hidden lg:h-[300px]">
               <img
-                src="/imeet/scroll.jpg"
+                src="/images/events/scroll.jpg"
                 alt="A scholar writing glowing characters on a scroll by lantern light"
                 className="h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
               />
@@ -149,9 +150,9 @@ export default function Events() {
               </p>
               <div className="mt-auto flex flex-wrap items-end justify-between gap-4 border-t border-moon/10 pt-5">
                 <Meta />
-                <a href="#" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
+                <Link href="/events/coding-challenges" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
                   DETAILS {ARROW}
-                </a>
+                </Link>
               </div>
             </div>
           </article>
@@ -163,7 +164,7 @@ export default function Events() {
           >
             <div className="relative h-[280px] overflow-hidden md:col-span-7 md:h-[400px]">
               <img
-                src="/imeet/courtyard.jpg"
+                src="/images/events/courtyard.jpg"
                 alt="A lantern-lit hilltop courtyard with pavilions displaying inventions"
                 className="h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
               />
@@ -179,9 +180,9 @@ export default function Events() {
               </p>
               <div className="mt-7 flex flex-wrap items-end justify-between gap-4">
                 <Meta />
-                <a href="#" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
+                <Link href="/events/project-showcases" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
                   EVENT DETAILS {ARROW}
-                </a>
+                </Link>
               </div>
             </div>
           </article>
@@ -192,7 +193,7 @@ export default function Events() {
             className={`event-card js-reveal [&.is-in]:animate-reveal group relative h-[460px] overflow-hidden bg-navy md:col-span-6 lg:col-span-5 ${hide("workshop")}`}
           >
             <img
-              src="/imeet/workshop.jpg"
+              src="/images/events/workshop.jpg"
               alt="A wooden workshop with tools and scrolls lit by amber lanterns"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
             />
@@ -206,9 +207,9 @@ export default function Events() {
               </p>
               <div className="mt-5 flex items-end justify-between gap-4 border-t border-moon/15 pt-4">
                 <Meta regLabel="REG." gap="gap-6" />
-                <a href="#" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
+                <Link href="/events/workshops" className="inline-flex items-center gap-3 font-nav text-xs font-bold tracking-[0.3em] text-moon transition-colors hover:text-vermilion">
                   DETAILS {ARROW}
-                </a>
+                </Link>
               </div>
             </div>
           </article>
@@ -233,9 +234,9 @@ export default function Events() {
                 <span className="text-mist">
                   SCHEDULE <span className="text-moon">TBA</span>
                 </span>
-                <a href="#" className="font-bold text-moon transition-colors hover:text-vermilion">
+                <Link href="/events/talks" className="font-bold text-moon transition-colors hover:text-vermilion">
                   DETAILS {ARROW}
-                </a>
+                </Link>
               </div>
             </div>
           </article>
@@ -258,9 +259,9 @@ export default function Events() {
               </p>
               <div className="mt-5 flex items-end justify-between border-t border-moon/10 pt-4 font-nav text-[11px] font-semibold tracking-[0.3em]">
                 <span className="text-mist">TBA</span>
-                <a href="#" className="font-bold text-moon transition-colors hover:text-vermilion">
+                <Link href="/events/festival-activities" className="font-bold text-moon transition-colors hover:text-vermilion">
                   DETAILS {ARROW}
-                </a>
+                </Link>
               </div>
             </div>
           </article>

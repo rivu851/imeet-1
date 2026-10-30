@@ -4,7 +4,7 @@
 
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
+import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
 import { GRAIN, TEXT_OUTLINE_RED } from "./styles";
 
 const PILLARS = [
@@ -18,7 +18,7 @@ const PILLARS = [
     body: "Celebrate curiosity, creative thinking, and the exchange of ideas.",
     tags: ["CURIOSITY", "CREATIVITY", "DIALOGUE"],
     scene: "SCENE 02 · THE SPARK",
-    img: "/imeet/lanterns.jpg",
+    img: "/images/imeet/lanterns.jpg",
     alt: "Paper lanterns and fireflies rising over moonlit grass",
     imgPosition: "object-[50%_40%]",
   },
@@ -32,7 +32,7 @@ const PILLARS = [
     body: "Explore technology, engineering, programming, and original solutions.",
     tags: ["TECHNOLOGY", "ENGINEERING", "PROGRAMMING"],
     scene: "SCENE 03 · THE FORGE OF IDEAS",
-    img: "/imeet/forge.jpg",
+    img: "/images/imeet/forge.jpg",
     alt: "A swordsmith's forge glowing with embers at night",
     imgPosition: "object-center",
   },
@@ -46,7 +46,7 @@ const PILLARS = [
     body: "Transform collaboration and experimentation into meaningful outcomes.",
     tags: ["COLLABORATION", "EXPERIMENT", "OUTCOME"],
     scene: "SCENE 04 · THE RIPPLE THAT REMAINS",
-    img: "/imeet/torii.jpg",
+    img: "/images/imeet/torii.jpg",
     alt: "A crimson torii gate standing in a moonlit misty lake with spreading ripples",
     imgPosition: "object-[60%_50%]",
   },

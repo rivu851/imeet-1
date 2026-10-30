@@ -1,31 +1,31 @@
-import About from "@/components/imeet/About";
-import Countdown from "@/components/imeet/Countdown";
-import Effects from "@/components/imeet/Effects";
-import Events from "@/components/imeet/Events";
-import Footer from "@/components/imeet/Footer";
-import Gallery from "@/components/imeet/Gallery";
-import Header from "@/components/imeet/Header";
-import Hero from "@/components/imeet/Hero";
-import HodsDesk from "@/components/imeet/HodsDesk";
-import Marquee from "@/components/imeet/Marquee";
-import Pillars from "@/components/imeet/Pillars";
-import Register from "@/components/imeet/Register";
-import SmoothScroll from "@/components/imeet/SmoothScroll";
+import AboutSection from "@/components/home/AboutSection";
+import Countdown from "@/components/home/Countdown";
+import Effects from "@/components/home/Effects";
+import EventHighlights from "@/components/events/EventHighlights";
+import Gallery from "@/components/home/Gallery";
+import HeroSection from "@/components/home/HeroSection";
+import Marquee from "@/components/home/Marquee";
+import Pillars from "@/components/home/Pillars";
+import SmoothScroll from "@/components/home/SmoothScroll";
+import HodsDesk from "@/components/hod-desk/HodsDesk";
+import Footer from "@/components/common/Footer";
+import Navbar from "@/components/common/Navbar";
+import RegisterSection from "@/components/signup/RegisterSection";
 
 export default function Home() {
   return (
     <>
-      <Header />
+      <Navbar />
       <main id="main">
-        <Hero />
-        <About />
+        <HeroSection />
+        <AboutSection />
         <Marquee />
         <Pillars />
-        <Events />
+        <EventHighlights />
         <Countdown />
         <HodsDesk />
         <Gallery />
-        <Register />
+        <RegisterSection />
       </main>
       <Footer />
       <Effects />

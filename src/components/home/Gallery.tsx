@@ -7,7 +7,7 @@ import { lenis } from "./SmoothScroll";
 import SectionBackdrop from "./SectionBackdrop";
 import { TEXT_OUTLINE } from "./styles";
 
-const IMG = "/imeet/";
+const IMG = "/images/imeet/";
 
 const FRAMES = [
   { src: `${IMG}valley.jpg`, alt: "Placeholder artwork: moonlit valley", size: "col-span-2 h-[260px] md:col-span-8 md:h-[480px]" },
@@ -45,7 +45,7 @@ export default function Gallery() {
   return (
     <>
       <section id="gallery" className="relative overflow-clip bg-midnight py-24 md:py-32">
-        <SectionBackdrop sticky src="/imeet/lanterns.jpg" opacity={0.4} position="object-[50%_35%]" />
+        <SectionBackdrop sticky src="/images/imeet/lanterns.jpg" opacity={0.4} position="object-[50%_35%]" />
         <div className="pointer-events-none absolute bottom-[-10%] left-[-8%] h-[600px] w-[600px] bg-[radial-gradient(circle,rgba(197,42,44,0.12),transparent_65%)]"></div>
         <div data-petals="8" className="pointer-events-none absolute inset-0 overflow-hidden"></div>
         <div className="relative mx-auto w-full max-w-[1480px] px-6 md:px-10 lg:px-14">

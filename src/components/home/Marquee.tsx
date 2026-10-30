@@ -1,4 +1,4 @@
-import TextLoop from "@/components/TextLoop";
+import TextLoop from "@/components/ui/TextLoop";
 
 const TEXT = "Inspire ✦ Innovate ✦ Impact ✦ IMEET 2026 ✦ 19–20 November ✦ RCCIIT · Kolkata";
 

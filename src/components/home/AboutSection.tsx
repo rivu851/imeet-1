@@ -6,9 +6,9 @@ import { TEXT_OUTLINE } from "./styles";
 export default function About() {
   return (
     <section id="about" className="relative overflow-hidden bg-midnight pb-24 pt-16 md:pb-32 md:pt-28 lg:pt-36">
-      <SectionBackdrop src="/assest/background.jpg" opacity={0.65} />
+      <SectionBackdrop src="/images/backgrounds/background.jpg" opacity={0.65} />
       <img
-        src="/assest/samurai.webp"
+        src="/images/imeet/samurai.webp"
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 right-[-7%] hidden h-[88%] w-auto opacity-60 xl:right-[-2%] drop-shadow-[0_0_60px_rgba(197,42,44,0.25)] [mask-image:linear-gradient(to_bottom,#000_55%,transparent_98%)] lg:block"

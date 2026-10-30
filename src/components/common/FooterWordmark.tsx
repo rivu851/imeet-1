@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import StrokeText from "@/components/StrokeText";
+import StrokeText from "@/components/ui/StrokeText";
 
 const TEXT = "IMEET";
 const FONT_SIZE = 200;

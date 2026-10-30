@@ -82,7 +82,7 @@ function spawnLeaves(box: HTMLElement, count: number) {
   }
 }
 
-const PETAL_URLS = ["/imeet/petal-1.webp", "/imeet/petal-2.webp", "/imeet/petal-3.webp", "/imeet/petal-4.webp"];
+const PETAL_URLS = ["/images/imeet/petal-1.webp", "/images/imeet/petal-2.webp", "/images/imeet/petal-3.webp", "/images/imeet/petal-4.webp"];
 
 function spawnPetalSprites(box: HTMLElement, count: number, urls: string[]) {
   for (let i = 0; i < count; i++) {

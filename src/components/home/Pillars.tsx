@@ -5,7 +5,7 @@ import { TEXT_OUTLINE } from "./styles";
 export default function Pillars() {
   return (
     <section id="pillars" className="relative overflow-clip bg-midnight py-24 md:py-32">
-      <SectionBackdrop sticky src="/imeet/moon.jpg" opacity={0.55} position="object-[50%_30%]" />
+      <SectionBackdrop sticky src="/images/imeet/moon.jpg" opacity={0.55} position="object-[50%_30%]" />
       <div className="relative mx-auto w-full max-w-[1480px] px-6 md:px-10 lg:px-14">
         <div id="pillars-head" className="flex flex-col gap-6 border-b border-moon/10 pb-10 md:flex-row md:items-end md:justify-between">
           <div className="js-reveal [&.is-in]:animate-reveal">

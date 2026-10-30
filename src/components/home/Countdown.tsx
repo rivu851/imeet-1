@@ -54,7 +54,7 @@ export default function Countdown() {
   return (
     <section id="countdown" className="relative overflow-hidden py-28 md:py-40">
       <img
-        src="/imeet/moon.jpg"
+        src="/images/imeet/moon.jpg"
         alt="Crescent moon behind drifting clouds over dark mountain peaks"
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />

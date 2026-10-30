@@ -8,8 +8,8 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-const FAR_SRC = "/imeet/clouds-far.webp";
-const NEAR_SRC = "/imeet/clouds-near.webp";
+const FAR_SRC = "/images/imeet/clouds-far.webp";
+const NEAR_SRC = "/images/imeet/clouds-near.webp";
 
 const OVERLAP = 12;
 const STEP = 100 - OVERLAP;
