@@ -9,7 +9,7 @@ import { GRAIN } from "./styles";
 // On phones it's placed so the mountain ridge sits at the foot of the title and the
 // lit village lands right of centre.
 const PAINTING_FRAME =
-  "absolute left-[calc(79vw-75.7cqh)] top-[11.65cqh] [will-change:transform,scale] h-[54.6cqh] w-[97cqh] hero-wide:top-1/2 hero-wide:h-[max(100cqh,56.28cqw)] hero-wide:w-[max(100cqw,177.68cqh)] hero-wide:-translate-y-1/2 hero-wide:left-[24%] hero-wide:-translate-x-[24%] hero-lg:left-1/2 hero-lg:top-[max(calc(470*var(--u)+1cqh-0.38*max(100cqh,56.28cqw)),calc(100cqh-max(100cqh,56.28cqw)))] hero-lg:-translate-x-1/2 hero-lg:translate-y-0";
+  "absolute left-[calc(81.4vw-75.7cqh)] top-[11.65cqh] [will-change:transform,scale] h-[54.6cqh] w-[97cqh] hero-wide:top-1/2 hero-wide:h-[max(100cqh,56.28cqw)] hero-wide:w-[max(100cqw,177.68cqh)] hero-wide:-translate-y-1/2 hero-wide:left-[24%] hero-wide:-translate-x-[24%] hero-lg:left-[calc(50%+60*var(--u))] hero-lg:top-[max(calc(470*var(--u)+1cqh-0.38*max(100cqh,56.28cqw)),calc(100cqh-max(100cqh,56.28cqw)))] hero-lg:-translate-x-1/2 hero-lg:translate-y-0";
 
 const SCENE_BOX = "animate-scene-in pointer-events-none absolute inset-0";
 const PARALLAX_BOX = "parallax absolute will-change-transform -inset-[4%] [container-type:size] hero-lg:-inset-x-[1%] hero-lg:-inset-y-[1%]";
@@ -75,7 +75,7 @@ export default function Hero() {
       </div>
 
       <div className="pointer-events-none absolute inset-0 animate-title-in">
-        <div className="absolute right-[3vw] top-[24.5%] flex w-[calc(70*var(--pu))] flex-col items-end gap-[calc(1.6*var(--pu))] hero-wide:bottom-[calc(100%-490*var(--u))] hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-auto hero-wide:w-[max(calc(100%-70*var(--u)-79svh),40vw)] hero-wide:translate-x-0 hero-wide:items-end hero-wide:gap-[calc(25*var(--u))]">
+        <div className="absolute right-[3vw] top-[23.2%] flex w-[calc(70*var(--pu))] flex-col items-end gap-[calc(1.6*var(--pu))] hero-wide:bottom-[calc(100%-472*var(--u))] hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-auto hero-wide:w-[max(calc(100%-70*var(--u)-79svh),40vw)] hero-wide:translate-x-0 hero-wide:items-end hero-wide:gap-[calc(25*var(--u))]">
           <img src="/images/imeet/departmentofitwhite.png" alt="Departmental fest of IT" className="w-[calc(46*var(--pu))] hero-wide:w-[calc(465*var(--u))]" />
           <h1 className="m-0 w-full">
             <img src="/images/imeet/imeet-white.png" alt="IMEET 2026" className="w-full" />
@@ -146,7 +146,7 @@ export default function Hero() {
         id="hero-ui"
         className="absolute inset-0 z-20 text-ivory [--cut:calc(2.4*var(--pu))] [text-shadow:0_2px_0_rgba(0,0,0,0.55),0_2px_16px_rgba(2,6,18,0.9)] animate-info-in hero-wide:[--cut:calc(14*var(--u))]"
       >
-        <div className="absolute left-[27vw] right-[3vw] top-[36.5%] flex flex-col items-center gap-[calc(2.4*var(--pu))] hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-[calc(528*var(--u))] hero-wide:items-end hero-wide:gap-[calc(22*var(--u))]">
+        <div className="absolute left-[27vw] right-[3vw] top-[36.5%] flex flex-col items-center gap-[calc(2.4*var(--pu))] hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-[calc(483*var(--u))] hero-wide:items-end hero-wide:gap-[calc(22*var(--u))]">
           <p className="m-0 flex items-center gap-[calc(1.8*var(--pu))] whitespace-nowrap font-display text-[length:calc(2.9*var(--pu))] leading-none tracking-[0.06em] hero-wide:gap-[calc(24*var(--u))] hero-wide:text-[calc(38*var(--u))]">
             <span>INSPIRE</span>
             <i className={DIAMOND} aria-hidden="true"></i>
@@ -165,7 +165,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="absolute left-1/2 top-[67.4%] flex w-[calc(70*var(--pu))] -translate-x-1/2 hero-wide:w-auto hero-wide:translate-x-0 flex-col gap-[calc(2.4*var(--pu))] hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-[calc(672*var(--u))] hero-wide:flex-row hero-wide:items-center hero-wide:gap-[calc(18*var(--u))]">
+        <div className="absolute left-1/2 top-[67.4%] flex w-[calc(70*var(--pu))] -translate-x-1/2 hero-wide:w-auto hero-wide:translate-x-0 flex-col gap-[calc(2.4*var(--pu))] hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-[calc(627*var(--u))] hero-wide:flex-row hero-wide:items-center hero-wide:gap-[calc(18*var(--u))]">
           <a
             href="#"
             className={`${BUTTON} bg-[linear-gradient(180deg,#d0282b,#a8181b_55%,#5e090b)] [filter:drop-shadow(0_6px_16px_rgba(120,12,14,0.55))] [&:hover]:[filter:drop-shadow(0_6px_22px_rgba(208,40,43,0.6))_brightness(1.12)]`}

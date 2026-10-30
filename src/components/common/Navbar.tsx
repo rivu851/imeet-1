@@ -16,11 +16,13 @@ const LINKS = [
 export default function Header() {
   const [hiddenByScroll, setHiddenByScroll] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
+      setScrolled(y > 24);
       if (y < 120) setHiddenByScroll(false);
       else if (y - lastY > 4) setHiddenByScroll(true);
       else if (lastY - y > 4) setHiddenByScroll(false);
@@ -39,17 +41,31 @@ export default function Header() {
     <header
       id="header"
       className={`animate-nav-in fixed inset-x-0 top-0 z-50 transition-[translate] duration-500 ease-out [text-shadow:0_2px_10px_rgba(0,0,0,0.85)] ${
-        hiddenByScroll && !menuOpen ? "-translate-y-full" : "translate-y-0"
+        hiddenByScroll && !menuOpen ? "lg:-translate-y-full" : "translate-y-0"
       }`}
     >
       <nav
         id="main-nav"
-        className="relative flex h-20 w-full items-center justify-between px-6 md:px-10 lg:h-[calc(165*var(--u))] lg:px-[calc(40*var(--u))]"
+        className="relative flex h-[calc(var(--logo)+24px)] w-full items-center justify-between px-6 [--logo:clamp(64px,16vw,120px)] md:px-10 lg:h-[calc(165*var(--u))] lg:px-[calc(40*var(--u))]"
         aria-label="Primary"
       >
-        <Link id="logo-slot" href="/" className="flex items-center" aria-label="IMEET home">
+        {/* Phones and tablets: at the top of the page the logo floats in the middle of the bar;
+            once the page is scrolled it glides back to the left and only bobs gently. */}
+        <Link
+          id="logo-slot"
+          href="/"
+          onClick={closeOnMobile}
+          className={`flex items-center transition-[translate,scale] duration-[2400ms] ease-[cubic-bezier(0.45,0,0.2,1)] lg:translate-x-0 lg:scale-100 ${
+            scrolled ? "" : "translate-x-[calc(50vw-24px-var(--logo)/2)] md:translate-x-[calc(50vw-40px-var(--logo)/2)]"
+          } ${menuOpen ? "scale-110" : ""}`}
+          aria-label="IMEET home"
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/imeet/logo.svg" alt="IMEET" className="h-14 w-14 lg:h-[calc(100*var(--u))] lg:w-[calc(100*var(--u))]" />
+          <img
+            src="/images/imeet/logo.svg"
+            alt="IMEET"
+            className={`size-[var(--logo)] lg:size-[calc(100*var(--u))] lg:animate-none ${scrolled ? "animate-logo-bob" : "animate-logo-float"}`}
+          />
         </Link>
         <ul
           id="nav-links"

@@ -45,6 +45,8 @@
   --animate-dust: dustFloat ease-in-out infinite;
   --animate-moon-float: moonFloat 9s ease-in-out infinite;
   --animate-petal-tumble: petalTumble 3.2s ease-in-out infinite;
+  --animate-logo-bob: logoBob 3.6s ease-in-out infinite;
+  --animate-logo-float: logoFloat 3.2s ease-in-out infinite;
 
   @keyframes sceneIn {
     from { opacity: 0; transform: scale(1.07); }
@@ -87,6 +89,14 @@
   @keyframes moonFloat {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-10px) rotate(-1.5deg); }
+  }
+  @keyframes logoBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); filter: drop-shadow(0 0 0 rgba(208, 40, 43, 0)); }
+    50% { transform: translateY(-6px) rotate(-3deg); filter: drop-shadow(0 6px 14px rgba(208, 40, 43, 0.55)); }
   }
   @keyframes petalTumble {
     0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }

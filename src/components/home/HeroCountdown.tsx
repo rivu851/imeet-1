@@ -36,7 +36,7 @@ export default function HeroCountdown() {
   }, []);
 
   return (
-    <div className="absolute left-1/2 top-[81.5%] w-[calc(83*var(--pu))] -translate-x-1/2 hero-wide:translate-x-0 hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-[calc(800*var(--u))] hero-wide:w-[calc(620*var(--u))]">
+    <div className="absolute left-1/2 top-[81.5%] w-[calc(83*var(--pu))] -translate-x-1/2 hero-wide:translate-x-0 hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-[calc(755*var(--u))] hero-wide:w-[calc(620*var(--u))]">
       <p className={LABEL}>THE COUNTDOWN BEGINS</p>
       <div className={BOX}>
         {LABELS.map((label, i) => (
