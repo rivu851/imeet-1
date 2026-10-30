@@ -164,10 +164,10 @@ export default function Effects() {
       const layers = Array.from(document.querySelectorAll<HTMLElement>("#hero .parallax"));
       const k = isMobile ? 0.4 : 1;
       const depth = layers.map((el) => parseFloat(el.dataset.depth || "0") * k);
-      const rate = layers.map((el) => parseFloat(el.dataset.scroll || "0") * k);
+      const rate = layers.map((el) => (isMobile ? 0 : parseFloat(el.dataset.scroll || "0") * k));
       const speeds = Array.from(document.querySelectorAll<HTMLElement>("[data-speed]"));
       const speedRate = speeds.map((el) => parseFloat(el.dataset.speed!) * k);
-      const zooms = Array.from(document.querySelectorAll<HTMLElement>("[data-hero-zoom]"));
+      const zooms = isMobile ? [] : Array.from(document.querySelectorAll<HTMLElement>("[data-hero-zoom]"));
       const hero = byId("hero");
       let heroH = hero?.offsetHeight || window.innerHeight;
       let vh = window.innerHeight;
@@ -211,6 +211,7 @@ export default function Effects() {
       };
 
       const onPointer = (e: PointerEvent) => {
+        if (isMobile && e.pointerType === "touch") return;
         mx = e.clientX / window.innerWidth - 0.5;
         my = e.clientY / window.innerHeight - 0.5;
         kick();

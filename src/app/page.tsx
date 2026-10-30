@@ -5,7 +5,6 @@ import EventHighlights from "@/components/events/EventHighlights";
 import HeroSection from "@/components/home/HeroSection";
 import Marquee from "@/components/home/Marquee";
 import Pillars from "@/components/home/Pillars";
-import SmoothScroll from "@/components/home/SmoothScroll";
 import HodsDesk from "@/components/hod-desk/HodsDesk";
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
@@ -27,7 +26,6 @@ export default function Home() {
       </main>
       <Footer />
       <Effects />
-      <SmoothScroll />
     </>
   );
 }

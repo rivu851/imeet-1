@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useState } from "react";
-import { lenis } from "./SmoothScroll";
+import { lenis } from "@/components/common/SmoothScroll";
 import SectionBackdrop from "./SectionBackdrop";
 import { TEXT_OUTLINE } from "./styles";
 

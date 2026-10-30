@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SmoothScroll from "@/components/common/SmoothScroll";
 import { Anton, IBM_Plex_Mono, Inter, Noto_Serif_JP, Rajdhani } from "next/font/google";
 import localFont from "next/font/local";
 import "lenis/dist/lenis.css";
@@ -53,7 +54,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${shuriken.variable} ${anton.variable} ${inter.variable} ${notoSerifJp.variable} ${rajdhani.variable} ${plexMono.variable}`}
     >
-      <body className="bg-midnight font-body text-moon antialiased">{children}</body>
+      <body className="bg-midnight font-body text-moon antialiased">
+        {children}
+        <SmoothScroll />
+      </body>
     </html>
   );
 }

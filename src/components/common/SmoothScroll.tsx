@@ -11,9 +11,12 @@ export default function SmoothScroll() {
 
     lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.08,
-      wheelMultiplier: 0.9,
-      anchors: { offset: -80, duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4) },
+      smoothWheel: true,
+      syncTouch: true,
+      syncTouchLerp: 0.12,
+      lerp: 0.12,
+      wheelMultiplier: 0.85,
+      anchors: { offset: -80, duration: 1.2, easing: (t) => 1 - Math.pow(1 - t, 4) },
     });
 
     return () => {
