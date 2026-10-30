@@ -192,21 +192,21 @@
     position: relative;
     z-index: 1;
     display: flex;
-    width: min(90vw, 390px);
+    width: min(92vw, 440px);
     align-items: center;
     flex-direction: column;
   }
 
   .site-loader__seal {
     display: grid;
-    width: 30px;
-    height: 30px;
+    width: clamp(30px, 8vw, 38px);
+    height: clamp(30px, 8vw, 38px);
     place-items: center;
-    margin-bottom: 12px;
+    margin-bottom: clamp(8px, 2.5vh, 14px);
     border: 1px solid rgba(202, 76, 62, 0.78);
     color: #d7785f;
     font-family: var(--font-jp);
-    font-size: 1rem;
+    font-size: clamp(1rem, 4vw, 1.2rem);
     line-height: 1;
     box-shadow: inset 0 0 10px rgba(202, 76, 62, 0.12), 0 0 15px rgba(202, 76, 62, 0.1);
     transform: rotate(-8deg);
@@ -215,10 +215,10 @@
   .site-loader__rings {
     position: relative;
     display: grid;
-    width: min(58vw, 244px);
+    width: min(82vw, 40svh, 360px);
     aspect-ratio: 1;
     place-items: center;
-    margin-bottom: 27px;
+    margin-bottom: clamp(16px, 4vh, 28px);
   }
 
   .site-loader__ring {
@@ -254,7 +254,7 @@
 
   .site-loader__logo {
     display: grid;
-    width: 64%;
+    width: 68%;
     aspect-ratio: 1;
     place-items: center;
     border: 1px solid rgba(242, 213, 158, 0.32);
@@ -265,8 +265,8 @@
   }
 
   .site-loader__logo img {
-    width: 84%;
-    height: 84%;
+    width: 88%;
+    height: 88%;
     object-fit: contain;
     filter: drop-shadow(0 0 12px rgba(245, 204, 122, 0.52));
   }
@@ -274,7 +274,7 @@
   .site-loader__name {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2.1rem, 9vw, 3rem);
+    font-size: clamp(2.25rem, 10.5vw, 3.4rem);
     line-height: 1;
     letter-spacing: 0.16em;
     padding-left: 0.16em;
@@ -293,17 +293,17 @@
   .site-loader__tagline {
     margin: 12px 0 0;
     font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    padding-left: 0.22em;
+    font-size: clamp(0.48rem, 2.5vw, 0.68rem);
+    letter-spacing: clamp(0.12em, 1vw, 0.22em);
+    padding-left: clamp(0.12em, 1vw, 0.22em);
     color: rgba(238, 216, 174, 0.68);
   }
 
   .site-loader__progress {
     display: block;
-    width: 126px;
+    width: clamp(108px, 36vw, 150px);
     height: 1px;
-    margin-top: 25px;
+    margin-top: clamp(16px, 4vh, 25px);
     transform-origin: left;
     background: linear-gradient(90deg, transparent, #eac57f, transparent);
     animation: loader-progress 2s cubic-bezier(0.6, 0, 0.4, 1) both;
@@ -311,7 +311,7 @@
 
   @media (max-width: 480px) {
     .site-loader__tagline {
-      font-size: 0.52rem;
+      white-space: nowrap;
     }
 
     .site-loader::after {
