@@ -2,7 +2,6 @@ import AboutSection from "@/components/home/AboutSection";
 import Countdown from "@/components/home/Countdown";
 import Effects from "@/components/home/Effects";
 import EventHighlights from "@/components/events/EventHighlights";
-import Gallery from "@/components/home/Gallery";
 import HeroSection from "@/components/home/HeroSection";
 import Marquee from "@/components/home/Marquee";
 import Pillars from "@/components/home/Pillars";
@@ -20,11 +19,10 @@ export default function Home() {
         <HeroSection />
         <AboutSection />
         <Marquee />
-        <Pillars />
         <EventHighlights />
-        <Countdown />
         <HodsDesk />
-        <Gallery />
+        <Pillars />
+        <Countdown />
         <RegisterSection />
       </main>
       <Footer />

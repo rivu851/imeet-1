@@ -8,7 +8,7 @@ const LINKS = [
   { href: "/about", label: "ABOUT IMEET" },
   { href: "/hod-desk", label: "HOD'S DESK" },
   { href: "/events", label: "EVENTS" },
-  { href: "/#gallery", label: "GALLERY" },
+  { href: "/gallery", label: "GALLERY" },
   { href: "/signup", label: "SIGN UP" },
   { href: "/contact", label: "CONTACT" },
 ];

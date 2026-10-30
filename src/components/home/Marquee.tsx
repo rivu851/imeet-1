@@ -8,7 +8,7 @@ export default function Marquee() {
       className="relative h-[clamp(240px,28vw,520px)] overflow-hidden bg-midnight"
       aria-label="Inspire, Innovate, Impact, IMEET 2026"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-[70%] -translate-y-1/2 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(197,42,44,0.22),transparent_75%)]"></div>
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-[70%] -translate-y-1/2 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(139,92,246,0.22),transparent_75%)]"></div>
       <div className="absolute left-1/2 top-1/2 w-[200%] -translate-x-1/2 -translate-y-1/2 md:w-[130%] lg:w-full">
         <TextLoop
           text={TEXT}
@@ -20,7 +20,7 @@ export default function Marquee() {
           fontWeight={400}
           letterSpacing={2}
           color="#DCE5F1"
-          ribbonColor="#A91619"
+          ribbonColor="#6D28D9"
           ribbonWidth={76}
           cross
           crossColor="#111B2A"
