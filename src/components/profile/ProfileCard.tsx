@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { PLACEHOLDER_USER, type ProfileUser } from "@/data/profileUser";
+import type { ProfileUser } from "@/data/profileUser";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
 
 function StatusPill({ children, className }: { children: ReactNode; className?: string }) {
@@ -137,9 +137,14 @@ function AcademicInformation({ user }: { user: ProfileUser }) {
   );
 }
 
-export default function ProfileCard() {
+export default function ProfileCard({
+  user,
+  onSaveUser,
+}: {
+  user: ProfileUser;
+  onSaveUser: (formData: ProfileUser) => Promise<void>;
+}) {
   const [editing, setEditing] = useState(false);
-  const [user, setUser] = useState(PLACEHOLDER_USER);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const profileComplete = Boolean(
@@ -160,7 +165,7 @@ export default function ProfileCard() {
 
   // Keep all persistence here so this local update can later be replaced with an API call.
   const saveProfile = async (updatedUser: ProfileUser, avatarFile: File | null) => {
-    setUser(updatedUser);
+    await onSaveUser(updatedUser);
     if (avatarFile) setAvatarUrl(URL.createObjectURL(avatarFile));
     setSaved(true);
     setEditing(false);

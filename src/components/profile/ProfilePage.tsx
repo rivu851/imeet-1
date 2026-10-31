@@ -1,6 +1,16 @@
+"use client";
+
+import { useState } from "react";
 import ProfileCard from "@/components/profile/ProfileCard";
+import { PLACEHOLDER_USER, type ProfileUser } from "@/data/profileUser";
 
 export default function ProfilePage() {
+  const [user, setUser] = useState<ProfileUser>(PLACEHOLDER_USER);
+
+  const saveUser = async (formData: ProfileUser) => {
+    setUser({ ...user, ...formData });
+  };
+
   return (
     <main className="relative min-h-svh overflow-hidden bg-midnight text-moon">
       <div
@@ -12,8 +22,8 @@ export default function ProfilePage() {
         className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,9,17,0.48),rgba(5,9,17,0.82)_48%,rgba(5,9,17,0.92)),linear-gradient(0deg,rgba(5,9,17,0.55),transparent_55%,rgba(5,9,17,0.35)]"
       />
 
-      <div className="relative z-10 mx-auto grid min-h-svh max-w-[1680px] grid-cols-1 items-center gap-8 px-4 pb-12 pt-28 sm:gap-10 sm:px-8 sm:pb-14 sm:pt-32 md:px-10 xl:grid-cols-[0.92fr_1.08fr] xl:gap-12 xl:px-16 xl:pb-10 xl:pt-[calc(165*var(--u))]">
-        <section className="relative flex min-h-[32svh] items-center pl-0 sm:min-h-[36svh] xl:min-h-[70svh] xl:pl-24">
+      <div className="relative z-10 mx-auto grid min-h-svh max-w-[1680px] grid-cols-1 items-center gap-8 px-4 pb-12 pt-28 sm:gap-10 sm:px-8 sm:pb-14 sm:pt-32 md:px-10 xl:grid-cols-[0.92fr_1.08fr] xl:gap-12 xl:px-16 xl:pb-10 xl:pt-[calc(100*var(--u))]">
+        <section className="relative flex min-h-[32svh] items-start pl-0 pt-3 sm:min-h-[36svh] sm:pt-4 xl:min-h-[70svh] xl:pl-24 xl:pt-8">
           <div className="absolute left-0 top-1/2 hidden -translate-y-1/2 flex-col items-center text-center xl:flex">
             <span className="font-nav text-sm font-bold tracking-[0.15em] text-red-hi">01</span>
             <span className="my-3 h-20 w-px bg-gradient-to-b from-red-hi/80 via-moon/50 to-moon/10 md:h-28" />
@@ -39,7 +49,7 @@ export default function ProfilePage() {
           </div>
         </section>
 
-        <ProfileCard />
+        <ProfileCard user={user} onSaveUser={saveUser} />
       </div>
     </main>
   );

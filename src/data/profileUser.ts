@@ -13,5 +13,5 @@ export const PLACEHOLDER_USER: ProfileUser = {
   contactNumber: "9876543210",
   department: "Information Technology",
   year: "3rd Year",
-  rollNumber: "IT2023-042",
+  rollNumber: "IT2024001",
 };
