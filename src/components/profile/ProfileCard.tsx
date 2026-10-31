@@ -2,8 +2,9 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import type { ProfileUser } from "@/data/profileUser";
+import type { ProfileUser, RegisteredEvent } from "@/data/profileUser";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
+import MyEventsPanel from "@/components/profile/MyEventsPanel";
 
 function StatusPill({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -140,9 +141,17 @@ function AcademicInformation({ user }: { user: ProfileUser }) {
 export default function ProfileCard({
   user,
   onSaveUser,
+  view,
+  events,
+  onShowEvents,
+  onBackToProfile,
 }: {
   user: ProfileUser;
   onSaveUser: (formData: ProfileUser) => Promise<void>;
+  view: "profile" | "events";
+  events: RegisteredEvent[];
+  onShowEvents: () => void;
+  onBackToProfile: () => void;
 }) {
   const [editing, setEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
@@ -150,6 +159,7 @@ export default function ProfileCard({
   const profileComplete = Boolean(
     user.name.trim() && /^\d{10}$/.test(user.contactNumber.trim()) && user.department.trim() && user.year.trim() && user.rollNumber.trim(),
   );
+  const profileVisible = view === "profile";
 
   useEffect(() => {
     if (!saved) return;
@@ -176,55 +186,82 @@ export default function ProfileCard({
       aria-label="Participant profile"
       className="w-full rounded-xl border border-moon/15 bg-midnight/65 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.38)] backdrop-blur-xl sm:p-6 lg:p-7"
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={editing ? "edit-mode" : "view-mode"}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.24, ease: "easeOut" }}
+      <div className="grid grid-cols-1">
+        <div
+          aria-hidden={!profileVisible}
+          inert={!profileVisible}
+          className={`col-start-1 row-start-1 min-w-0 transition-[opacity,transform] duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-opacity ${
+            profileVisible ? "pointer-events-auto translate-x-0 opacity-100" : "pointer-events-none -translate-x-6 opacity-0"
+          }`}
         >
-        {editing ? (
-          <ProfileEditForm user={user} avatarUrl={avatarUrl} onCancel={() => setEditing(false)} onSave={saveProfile} />
-        ) : (
-          <>
-          <ProfileCardHeader profileComplete={profileComplete} saved={saved} />
-          <ParticipantSummary user={user} avatarUrl={avatarUrl} />
-          <div className="space-y-5 pt-5 sm:space-y-6 sm:pt-6">
-            <PersonalInformation user={user} />
-            <AcademicInformation user={user} />
-          </div>
-          <div className="mt-6">
-            <button
-              type="button"
-              onClick={() => setEditing(true)}
-              className="flex w-full items-center justify-center gap-2.5 rounded-full border border-moon/20 bg-midnight/20 px-5 py-3 font-nav text-xs font-bold uppercase tracking-[0.2em] text-moon/85 transition-[color,background-color,border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-vermilion/70 hover:bg-vermilion/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vermilion focus-visible:ring-offset-2 focus-visible:ring-offset-midnight"
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={editing ? "edit-mode" : "view-mode"}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.24, ease: "easeOut" }}
             >
-              <i className="fa-solid fa-pen-to-square text-vermilion" aria-hidden="true" />
-              Edit Profile
-            </button>
-          </div>
-          <div className="mt-6 border-t border-moon/10 pt-4">
-            <button
-              type="button"
-              className="group flex w-full items-center gap-4 rounded-md px-3 py-3 text-left transition-colors duration-300 hover:bg-vermilion/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vermilion"
-            >
-              <i className="fa-solid fa-arrow-right-from-bracket text-lg text-vermilion" aria-hidden="true" />
-              <span className="min-w-0 flex-1">
-                <span className="block text-sm font-semibold text-moon transition-colors group-hover:text-white">
-                  Logout
-                </span>
-                <span className="mt-1 block text-xs text-moon/50">
-                  Sign out of your participant account.
-                </span>
-              </span>
-              <i className="fa-solid fa-chevron-right text-xs text-moon/40 transition-colors group-hover:text-vermilion" aria-hidden="true" />
-            </button>
-          </div>
-          </>
-        )}
-        </motion.div>
-      </AnimatePresence>
+              {editing ? (
+                <ProfileEditForm user={user} avatarUrl={avatarUrl} onCancel={() => setEditing(false)} onSave={saveProfile} />
+              ) : (
+                <>
+                  <ProfileCardHeader profileComplete={profileComplete} saved={saved} />
+                  <ParticipantSummary user={user} avatarUrl={avatarUrl} />
+                  <div className="space-y-5 pt-5 sm:space-y-6 sm:pt-6">
+                    <PersonalInformation user={user} />
+                    <AcademicInformation user={user} />
+                  </div>
+                  <div className="mt-6">
+                    <button
+                      type="button"
+                      onClick={() => setEditing(true)}
+                      className="flex w-full items-center justify-center gap-2.5 rounded-full border border-moon/20 bg-midnight/20 px-5 py-3 font-nav text-xs font-bold uppercase tracking-[0.2em] text-moon/85 transition-[color,background-color,border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-vermilion/70 hover:bg-vermilion/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vermilion focus-visible:ring-offset-2 focus-visible:ring-offset-midnight"
+                    >
+                      <i className="fa-solid fa-pen-to-square text-vermilion" aria-hidden="true" />
+                      Edit Profile
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={onShowEvents}
+                    className="group mt-5 flex w-full items-center gap-4 rounded-md border-t border-moon/10 px-3 py-4 text-left transition-colors duration-300 hover:bg-vermilion/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vermilion"
+                  >
+                    <i className="fa-solid fa-ticket text-lg text-vermilion" aria-hidden="true" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-moon transition-colors group-hover:text-white">My Events</span>
+                      <span className="mt-1 block text-xs text-moon/50">View the events you&apos;ve registered for</span>
+                    </span>
+                    <i className="fa-solid fa-chevron-right text-xs text-moon/40 transition-colors group-hover:text-vermilion" aria-hidden="true" />
+                  </button>
+                  <div className="border-t border-moon/10 pt-2">
+                    <button
+                      type="button"
+                      className="group flex w-full items-center gap-4 rounded-md px-3 py-3 text-left transition-colors duration-300 hover:bg-vermilion/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vermilion"
+                    >
+                      <i className="fa-solid fa-arrow-right-from-bracket text-lg text-vermilion" aria-hidden="true" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-moon transition-colors group-hover:text-white">Logout</span>
+                        <span className="mt-1 block text-xs text-moon/50">Sign out of your participant account.</span>
+                      </span>
+                      <i className="fa-solid fa-chevron-right text-xs text-moon/40 transition-colors group-hover:text-vermilion" aria-hidden="true" />
+                    </button>
+                  </div>
+                </>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div
+          aria-hidden={profileVisible}
+          inert={profileVisible}
+          className={`col-start-1 row-start-1 min-w-0 transition-[opacity,transform] duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-opacity ${
+            profileVisible ? "pointer-events-none translate-x-6 opacity-0" : "pointer-events-auto translate-x-0 opacity-100"
+          }`}
+        >
+          <MyEventsPanel events={events} onBack={onBackToProfile} active={!profileVisible} />
+        </div>
+      </div>
     </section>
   );
 }
