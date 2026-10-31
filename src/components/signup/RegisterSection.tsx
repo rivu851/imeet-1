@@ -9,7 +9,7 @@ export default function Register() {
         data-speed="-0.05"
         src="/images/imeet/stairway.jpg"
         alt="Lantern-lit stone stairway climbing toward a torii gate beneath a crescent moon"
-        className="absolute inset-0 h-full w-full object-cover object-[60%_50%]"
+        className="absolute inset-0 h-full w-full origin-right object-cover object-right md:origin-center md:object-[60%_50%]"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight via-midnight/40 to-midnight/60"></div>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_70%_at_15%_85%,rgba(8,11,20,0.85),transparent_70%)]"></div>

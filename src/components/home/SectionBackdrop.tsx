@@ -1,19 +1,23 @@
-/* eslint-disable @next/next/no-img-element */
-
 export default function SectionBackdrop({
   src,
+  mobileSrc,
   opacity = 0.35,
   position = "object-center",
   sticky = false,
 }: {
   src: string;
+  /* a portrait version for phones */
+  mobileSrc?: string;
   opacity?: number;
   position?: string;
   sticky?: boolean;
 }) {
   const frame = (
     <>
-      <img src={src} alt="" className={`h-full w-full object-cover ${position}`} style={{ opacity }} />
+      <picture>
+        {mobileSrc && <source media="(max-width: 767px)" srcSet={mobileSrc} />}
+        <img src={src} alt="" className={`h-full w-full object-cover ${position}`} style={{ opacity }} />
+      </picture>
       <div
         className={`absolute inset-0 bg-gradient-to-b ${
           sticky ? "from-midnight/85 via-midnight/25 to-midnight/85" : "from-midnight via-midnight/40 to-midnight"

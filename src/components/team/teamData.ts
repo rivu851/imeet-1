@@ -23,13 +23,13 @@ export interface CategoryTab {
 }
 
 export const CATEGORIES: CategoryTab[] = [
-  { id: "all", label: "All Nakama", kanji: "全員" },
+  { id: "all", label: "All Members", kanji: "全員" },
+  { id: "mentors", label: "Faculty Mentors", kanji: "顧問" },
   { id: "core", label: "Core Committee", kanji: "首脳部" },
   { id: "tech", label: "Technical & Web", kanji: "開発陣" },
   { id: "design", label: "Design & Media", kanji: "意匠部" },
   { id: "events", label: "Events & Operations", kanji: "執行部" },
   { id: "pr", label: "PR & Sponsorship", kanji: "広報部" },
-  { id: "mentors", label: "Faculty Mentors", kanji: "顧問" },
 ];
 
 export const TEAM_MEMBERS: TeamMember[] = [

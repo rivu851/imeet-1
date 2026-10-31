@@ -51,6 +51,9 @@
   --animate-petal-tumble: petalTumble 3.2s ease-in-out infinite;
   --animate-logo-bob: logoBob 3.6s ease-in-out infinite;
   --animate-logo-float: logoFloat 3.2s ease-in-out infinite;
+  --animate-samurai-in: samuraiIn 1.8s cubic-bezier(0.2, 0.65, 0.2, 1) both;
+  --animate-samurai-idle: samuraiIdle 7s ease-in-out infinite;
+  --animate-scene-drift: sceneDrift 26s ease-in-out infinite alternate;
 
   @keyframes sceneIn {
     from { opacity: 0; transform: scale(1.07); }
@@ -102,6 +105,20 @@
     0%, 100% { transform: translateY(0) rotate(0deg); filter: drop-shadow(0 0 0 rgba(208, 40, 43, 0)); }
     50% { transform: translateY(-6px) rotate(-3deg); filter: drop-shadow(0 6px 14px rgba(208, 40, 43, 0.55)); }
   }
+  @keyframes samuraiIn {
+    from { opacity: 0; transform: translateX(8%); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  /* slow breathing sway, pivoting at the feet */
+  @keyframes samuraiIdle {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-0.6%) rotate(-0.6deg) scale(1.012); }
+  }
+  /* very slow push-in on a background painting */
+  @keyframes sceneDrift {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
   @keyframes petalTumble {
     0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
     25% { transform: rotateX(55deg) rotateY(20deg) rotateZ(14deg); }
@@ -130,6 +147,8 @@
   :root {
     /* 1u = 1px of the 1920x1080 design */
     --u: min(calc(100vw / 1920), calc(100svh / 1080));
+    /* 1vw that stops growing past a 1920px-wide viewport, so zooming the browser out still shrinks the layout */
+    --vw: min(1vw, 19.2px);
     /* hero portrait layout: 1vw on phones, but no more than a 9:16 screen's
        1vw on wider portrait screens (tablets), so it keeps a phone's proportions */
     --pu: min(1vw, calc(max(100svh, 640px) * 0.005625));

@@ -7,7 +7,8 @@ export default function HodPhoto() {
       alt="Dr. Soumyadip Dhar, Head of the Department of Information Technology"
       width={768}
       height={768}
-      className="h-auto w-[min(100%,18rem)] object-contain sm:w-[min(100%,24rem)] lg:w-[min(48vw,48rem)]"
+      sizes="(min-width: 1024px) 29vw, 22rem"
+      className="h-auto w-[min(100%,22rem)] object-contain lg:w-full"
     />
   );
 }

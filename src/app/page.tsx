@@ -15,8 +15,12 @@ export default function Home() {
     <>
       <Navbar />
       <main id="main">
-        <HeroSection />
-        <AboutSection />
+        {/* one petal layer over the hero and the about section, so the petals drift from one into the other */}
+        <div className="relative">
+          <HeroSection />
+          <AboutSection />
+          <div id="layer-leaves" className="pointer-events-none absolute inset-0 z-10 overflow-hidden"></div>
+        </div>
         <HodDeskPage />
         <Marquee />
         <EventHighlights />

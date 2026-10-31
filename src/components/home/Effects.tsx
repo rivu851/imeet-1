@@ -52,7 +52,7 @@ function spawnGrass(group: SVGGElement, n: number) {
   }
 }
 
-function spawnLeaves(box: HTMLElement, count: number) {
+function spawnLeaves(box: HTMLElement, count: number, spread = 60) {
   for (let i = 0; i < count; i++) {
     const l = document.createElement("span");
     l.className = LEAF;
@@ -71,7 +71,7 @@ function spawnLeaves(box: HTMLElement, count: number) {
         ? "linear-gradient(135deg,#4a6380,#25354A)"
         : "linear-gradient(135deg,#D8B77A,#94723d)";
     l.style.left = `${-10 + Math.random() * 70}%`;
-    l.style.top = `${-10 + Math.random() * 60}%`;
+    l.style.top = `${-10 + Math.random() * spread}%`;
     l.style.setProperty("--dx", `${35 + Math.random() * 55}vw`);
     l.style.setProperty("--dy", `${30 + Math.random() * 60}vh`);
     l.style.setProperty("--r", `${(180 + Math.random() * 540) * (Math.random() < 0.5 ? -1 : 1)}deg`);
@@ -84,7 +84,7 @@ function spawnLeaves(box: HTMLElement, count: number) {
 
 const PETAL_URLS = ["/images/imeet/petal-1.webp", "/images/imeet/petal-2.webp", "/images/imeet/petal-3.webp", "/images/imeet/petal-4.webp"];
 
-function spawnPetalSprites(box: HTMLElement, count: number, urls: string[]) {
+function spawnPetalSprites(box: HTMLElement, count: number, urls: string[], spread = 60) {
   for (let i = 0; i < count; i++) {
     const l = document.createElement("span");
     l.className = LEAF;
@@ -93,7 +93,7 @@ function spawnPetalSprites(box: HTMLElement, count: number, urls: string[]) {
     l.style.perspective = "400px";
     if (Math.random() > 0.8) l.style.opacity = "0.7";
     l.style.left = `${-10 + Math.random() * 70}%`;
-    l.style.top = `${-10 + Math.random() * 60}%`;
+    l.style.top = `${-10 + Math.random() * spread}%`;
     l.style.setProperty("--dx", `${35 + Math.random() * 55}vw`);
     l.style.setProperty("--dy", `${30 + Math.random() * 60}vh`);
     l.style.setProperty("--r", `${(90 + Math.random() * 270) * (Math.random() < 0.5 ? -1 : 1)}deg`);
@@ -143,13 +143,14 @@ export default function Effects() {
     if (stars) spawnStars(stars, isMobile ? 14 : 34);
     if (grass) spawnGrass(grass, isMobile ? 30 : 62);
     if (!reduce) {
-      if (leaves) spawnLeaves(leaves, isMobile ? 7 : 16);
+      // this layer covers the hero and the about section, so its petals start spread over both
+      if (leaves) spawnLeaves(leaves, isMobile ? 11 : 24, 90);
       if (registerLeaves) spawnLeaves(registerLeaves, isMobile ? 4 : 9);
       petalBoxes.forEach((box) => {
         const count = Number(box.dataset.petals) || 6;
         spawnLeaves(box, isMobile ? Math.ceil(count / 2) : count);
       });
-      if (leaves) spawnPetalSprites(leaves, isMobile ? 10 : 22, PETAL_URLS);
+      if (leaves) spawnPetalSprites(leaves, isMobile ? 16 : 34, PETAL_URLS, 90);
       if (registerLeaves) spawnPetalSprites(registerLeaves, isMobile ? 6 : 12, PETAL_URLS);
       petalBoxes.forEach((box) => {
         const count = Number(box.dataset.petals) || 6;
@@ -237,7 +238,7 @@ export default function Effects() {
         window.removeEventListener("resize", onResize);
       });
 
-      const boxes = [byId("hero"), registerLeaves, dust, ...petalBoxes].filter((el): el is HTMLElement => !!el);
+      const boxes = [byId("hero"), leaves, registerLeaves, dust, ...petalBoxes].filter((el): el is HTMLElement => !!el);
       const sleeper = new IntersectionObserver(
         (entries) => entries.forEach((e) => e.target.classList.toggle("fx-off", !e.isIntersecting)),
         { rootMargin: "100px 0px" },
@@ -249,19 +250,37 @@ export default function Effects() {
       });
     }
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in");
-            io.unobserve(entry.target);
-          }
+    const revealObserver = (rootMargin: string) => {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin },
+      );
+      return io;
+    };
+    const io = revealObserver("0px 0px -5% 0px");
+    // data-reveal-late waits until the element is well up the screen, so the animation is seen
+    const lateIo = revealObserver("0px 0px -30% 0px");
+    // whatever is on screen at load waits for the intro loader, or it would animate unseen behind it
+    const revealTimer = window.setTimeout(
+      () => {
+        document.querySelectorAll<HTMLElement>(".js-reveal").forEach((el) => {
+          ("revealLate" in el.dataset ? lateIo : io).observe(el);
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -5% 0px" },
+      document.querySelector(".site-loader") ? 1600 : 0,
     );
-    document.querySelectorAll(".js-reveal").forEach((el) => io.observe(el));
-    cleanups.push(() => io.disconnect());
+    cleanups.push(() => {
+      window.clearTimeout(revealTimer);
+      io.disconnect();
+      lateIo.disconnect();
+    });
 
     return () => {
       cleanups.forEach((fn) => fn());

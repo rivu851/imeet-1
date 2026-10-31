@@ -48,15 +48,12 @@ export default function Events() {
 
   return (
     <section id="events" className="relative overflow-clip bg-midnight py-24 md:py-32">
-      <SectionBackdrop sticky src="/images/imeet/valley.jpg" opacity={0.45} />
+      <SectionBackdrop sticky src="/images/imeet/bg-event.webp" mobileSrc="/images/imeet/bg-event-mobile.webp" opacity={0.85} />
       <div className="pointer-events-none absolute -left-[12%] top-[20%] h-[800px] w-[800px] bg-[radial-gradient(circle,rgba(197,42,44,0.13),transparent_65%)]"></div>
       <div className="pointer-events-none absolute -right-[10%] bottom-[5%] h-[700px] w-[700px] bg-[radial-gradient(circle,rgba(216,183,122,0.09),transparent_65%)]"></div>
       <div data-petals="10" className="pointer-events-none absolute inset-0 overflow-hidden"></div>
-      <span className="pointer-events-none absolute right-0 top-16 select-none font-jp text-[18rem] leading-none text-moon/[0.03] md:text-[26rem]">
-        闘
-      </span>
       <div className="relative mx-auto w-full max-w-[1480px] px-6 md:px-10 lg:px-14">
-        <div id="events-head" className="grid gap-8 md:grid-cols-12 md:items-end">
+        <div id="events-head" className="grid gap-8 [text-shadow:0_2px_14px_rgba(0,0,0,0.9)] md:grid-cols-12 md:items-end">
           <div className="js-reveal [&.is-in]:animate-reveal md:col-span-7">
             <p className="flex items-center gap-4 font-nav text-xs font-bold tracking-[0.45em] text-vermilion">
               03 <span className="h-px w-10 bg-vermilion/70"></span> THE ARENA
@@ -66,10 +63,10 @@ export default function Events() {
             </h2>
           </div>
           <div className="js-reveal [&.is-in]:animate-reveal md:col-span-5 md:pb-3">
-            <p className="text-lg font-light leading-relaxed text-moon/75 md:text-xl md:leading-7">
+            <p className="text-lg font-light leading-relaxed text-moon md:text-xl md:leading-7">
               “Discover the challenges, ideas, and experiences of IMEET 2026.”
             </p>
-            <p className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-mist">
+            <p className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-moon/85">
               <i className="fa-solid fa-circle-info mt-1 text-xs text-amber"></i>
               Categories are shown as placeholders. Official event names, schedules and registration details will be
               announced.
@@ -79,9 +76,10 @@ export default function Events() {
 
         <div
           id="event-filters"
-          className="mt-12 flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-b border-moon/10 font-nav text-xs font-bold tracking-[0.3em]"
+          className="mt-12 flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-b border-moon/20 bg-midnight/70 backdrop-blur-sm font-nav text-xs font-bold tracking-[0.3em]"
           role="toolbar"
           aria-label="Filter events"
+          data-lenis-prevent-horizontal
         >
           {FILTERS.map((f) => {
             const on = f.id === filter;
@@ -91,7 +89,7 @@ export default function Events() {
                 onClick={() => setFilter(f.id)}
                 aria-pressed={on}
                 className={`shrink-0 border-b-2 px-4 py-4 transition-colors ${
-                  on ? "border-vermilion text-moon" : "border-transparent text-mist hover:text-moon"
+                  on ? "border-vermilion text-moon" : "border-transparent text-moon/75 hover:text-moon"
                 }`}
               >
                 {f.label}
@@ -131,7 +129,7 @@ export default function Events() {
           {/* Coding */}
           <article
             id="event-coding"
-            className={`event-card js-reveal [&.is-in]:animate-reveal group flex flex-col overflow-hidden border border-moon/10 bg-navy/70 transition-colors duration-500 hover:border-vermilion/40 md:col-span-6 lg:col-span-5 lg:h-[580px] ${hide("coding")}`}
+            className={`event-card js-reveal [&.is-in]:animate-reveal group flex flex-col overflow-hidden border border-moon/10 bg-navy transition-colors duration-500 hover:border-vermilion/40 md:col-span-6 lg:col-span-5 lg:h-[580px] ${hide("coding")}`}
           >
             <div className="relative h-[260px] overflow-hidden lg:h-[300px]">
               <img
@@ -160,7 +158,7 @@ export default function Events() {
           {/* Showcase */}
           <article
             id="event-showcase"
-            className={`event-card js-reveal [&.is-in]:animate-reveal group grid overflow-hidden border-y border-moon/10 md:col-span-6 md:grid-cols-12 lg:col-span-12 ${hide("showcase")}`}
+            className={`event-card js-reveal [&.is-in]:animate-reveal group grid overflow-hidden border-y border-moon/10 bg-midnight md:col-span-6 md:grid-cols-12 lg:col-span-12 ${hide("showcase")}`}
           >
             <div className="relative h-[280px] overflow-hidden md:col-span-7 md:h-[400px]">
               <img

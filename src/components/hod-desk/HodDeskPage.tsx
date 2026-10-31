@@ -1,6 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-
-import { GRAIN, PAUSE_OFFSCREEN, TEXT_OUTLINE } from "@/components/home/styles";
+import { GRAIN, PAUSE_OFFSCREEN } from "@/components/home/styles";
 import HodPhoto from "./HodPhoto";
 
 // Stepped tag silhouette matching the desktop reference label.
@@ -11,27 +9,30 @@ export default function HodDeskPage() {
   return (
     <section
       id="hod-desk-page"
-      className="relative flex min-h-screen items-center overflow-hidden bg-midnight px-4 py-16 sm:px-10 sm:py-20 md:px-16 md:py-28 lg:px-20"
+      className="relative flex min-h-svh items-center overflow-hidden bg-midnight px-4 py-16 sm:px-10 sm:py-20 md:px-16 md:py-24 lg:px-0 lg:py-[calc(3.5*var(--vw))]"
       aria-label="HOD's Desk"
     >
       {/* ── Background scene: background.jpg clearly visible ─────── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <img
-          src="/images/imeet/moonlight with sakura.png"
-          alt=""
-          className="h-full w-full object-cover object-[75%_center] opacity-95"
-        />
+        <picture>
+          <source media="(max-width: 767px)" srcSet="/images/imeet/bg-hod-mobile.webp" />
+          <img
+            src="/images/imeet/moonlight with sakura.png"
+            alt=""
+            className="h-full w-full object-cover object-right opacity-95"
+          />
+        </picture>
 
         {/* Dark gradients keep the content legible across desktop and mobile crops. */}
         <div
-          className="absolute inset-0 hidden md:block"
+          className="absolute inset-0 hidden lg:block"
           style={{
             background:
               "linear-gradient(to right, #080b14 0%, rgba(8,11,20,0.92) 32%, rgba(8,11,20,0.72) 46%, rgba(8,11,20,0.2) 56%, transparent 68%)",
           }}
         />
         <div
-          className="absolute inset-0 md:hidden"
+          className="absolute inset-0 lg:hidden"
           style={{
             background:
               "linear-gradient(to bottom, rgba(8,11,20,0.55) 0%, rgba(8,11,20,0.72) 35%, #080b14 100%)",
@@ -53,82 +54,65 @@ export default function HodDeskPage() {
       {/* Film-grain texture */}
       <div className={GRAIN} />
 
-      {/* ── Main content grid: max-w-1440, vertically centered ───── */}
-      <div className="relative z-20 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-7 md:gap-10 lg:grid-cols-12 lg:gap-14 xl:gap-16">
+      {/* ── Main content grid: lines up with the About section on desktop ── */}
+      <div className="relative z-20 mx-auto grid w-full grid-cols-1 gap-8 lg:max-w-[calc(100*var(--vw))] lg:grid-cols-[minmax(0,1fr)_calc(29*var(--vw))] lg:items-start lg:gap-x-[calc(4*var(--vw))] lg:gap-y-[calc(1.8*var(--vw))] lg:px-[calc(5.4*var(--vw))]">
         {/* The title leads on mobile; desktop places it beside the portrait. */}
-        <div className="flex flex-col gap-6 lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:gap-7">
-          <div className="js-reveal [&.is-in]:animate-reveal flex items-center">
-            <span
-              className={`inline-flex items-center border border-tag-cyan px-6 py-2 font-nav text-[13px] font-bold uppercase tracking-[0.25em] text-white md:text-[14px] ${TAG_CLIP}`}
-            >
-              From the HOD&apos;s Desk
-            </span>
-          </div>
+        <div className="flex flex-col items-start gap-5 lg:col-start-1 lg:row-start-1 lg:gap-[calc(1.5*var(--vw))]">
+          <span
+            className={`js-reveal [&.is-in]:animate-reveal inline-flex items-center border border-tag-cyan px-6 py-2 font-nav text-[13px] font-bold uppercase tracking-[0.25em] text-white md:text-[14px] ${TAG_CLIP}`}
+          >
+            From the HOD&apos;s Desk
+          </span>
 
-          <h1 className="js-reveal [&.is-in]:animate-reveal font-display text-[clamp(2.35rem,3.8vw,4.5rem)] uppercase leading-[0.92] text-white">
-            GUIDING
+          <h1 className="js-reveal [&.is-in]:animate-reveal font-display whitespace-nowrap text-[10vw] uppercase leading-none sm:text-[9.3vw] text-white lg:text-[length:calc(4.3*var(--vw))] lg:leading-[1.05]">
+            Guiding Minds
             <br />
-            MINDS
-            <br />
-            <span className={TEXT_OUTLINE}>BEYOND</span>
-            <br />
-            TECHNOLOGY.
+            {/* outer edge only: the stroke is painted under a dark fill, so the font's inner overlaps stay hidden */}
+            <span className="text-[#0a0e18] [-webkit-text-stroke:2px_rgba(220,229,241,0.75)] [paint-order:stroke_fill]">Beyond</span>{" "}
+            <br className="lg:hidden" />
+            Technology.
           </h1>
         </div>
 
         {/* ── Portrait: second on mobile, right column on desktop ─── */}
-        <div className="flex flex-col items-center justify-center lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
-          <div className="js-reveal [&.is-in]:animate-reveal flex flex-col items-center">
-            <HodPhoto />
+        <div className="js-reveal [&.is-in]:animate-reveal flex flex-col items-center lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
+          <HodPhoto />
 
-            {/* Muted caption */}
-            <p className="mt-4 text-center font-nav text-xs font-semibold tracking-[0.35em] text-mist">
-              HOD OF IT DEPT
+          <div className="-mt-2 w-[min(88%,19.5rem)] border border-moon/15 bg-midnight/85 px-4 py-3 text-center backdrop-blur-sm lg:w-[88%] lg:py-[calc(0.9*var(--vw))]">
+            <p className="font-nav text-lg font-bold uppercase tracking-[0.12em] text-white lg:text-[length:max(16px,calc(1.25*var(--vw)))]">
+              Dr. Soumyadip Dhar
+            </p>
+            <p className="mt-1 font-nav text-xs font-semibold uppercase tracking-[0.25em] text-sakura/80 lg:text-[length:max(11px,calc(0.72*var(--vw)))]">
+              Head of Department, IT
             </p>
           </div>
         </div>
 
         {/* ── Body content: third on mobile, below the title on desktop ─ */}
-        <div className="flex flex-col gap-6 lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:gap-7">
+        <div className="flex flex-col gap-6 text-base font-light leading-relaxed text-white/90 md:text-lg lg:col-start-1 lg:row-start-2 lg:gap-[calc(1.5*var(--vw))] lg:text-[length:max(15px,calc(1.1*var(--vw)))] lg:leading-[1.55]">
           {/* Credentials */}
-          <div className="js-reveal [&.is-in]:animate-reveal space-y-1.5 text-base font-light leading-[1.5] text-white md:text-[18px]">
-            <p>
-              Ph.D. (Tech.), Computer Science and Engineering,
-              University of Calcutta
-            </p>
-            <p>
-              Associate Professor &amp; Head, Department of Information
-              Technology,{" "}
-              <br className="hidden sm:inline" />
-              RCC Institute of Information Technology (RCCIIT)
-            </p>
+          <div className="js-reveal [&.is-in]:animate-reveal space-y-1">
+            <p className="font-normal text-white">Associate Professor &amp; Head, Department of Information Technology</p>
+            <p>RCC Institute of Information Technology (RCCIIT)</p>
+            <p>Ph.D. (Tech.), Computer Science and Engineering, University of Calcutta</p>
           </div>
 
-          <p className="js-reveal [&.is-in]:animate-reveal max-w-xl text-base font-light leading-[1.5] text-white md:text-[18px]">
-            Dr. Soumyadip Dhar leads the Department of Information Technology,
-            fostering academic excellence, innovation, and practical learning to
-            prepare students for the evolving world of technology.
+          <p className="js-reveal [&.is-in]:animate-reveal lg:max-w-[calc(46*var(--vw))]">
+            Dr. Soumyadip Dhar leads the Department of Information Technology, fostering academic excellence, innovation,
+            and practical learning to prepare students for the evolving world of technology.
           </p>
 
-          <div className="js-reveal [&.is-in]:animate-reveal flex gap-4 border-l-2 border-vermilion pl-5">
-            <div className="flex flex-col gap-2.5">
-              <i
-                className="fa-solid fa-quote-left text-2xl text-vermilion md:text-3xl"
-                aria-hidden="true"
-              />
-              <blockquote className="text-base font-light italic leading-[1.5] text-white md:text-[17px]">
-                &ldquo;It doesn&apos;t matter how beautiful your theory is, it
-                doesn&apos;t matter how smart you are. If it doesn&apos;t agree
-                with experiment, it&apos;s wrong.&rdquo;
-              </blockquote>
-              <p className="font-nav text-sm font-semibold tracking-[0.2em] text-white/80 md:text-base">
-                — Richard P. Feynman
-              </p>
-            </div>
+          <div className="js-reveal [&.is-in]:animate-reveal flex flex-col gap-2.5 border-l-2 border-vermilion pl-5 lg:gap-[calc(0.6*var(--vw))] lg:pl-[calc(1.4*var(--vw))]">
+            <i className="fa-solid fa-quote-left text-2xl text-vermilion lg:text-[length:calc(1.5*var(--vw))]" aria-hidden="true" />
+            <blockquote className="italic">
+              &ldquo;It doesn&apos;t matter how beautiful your theory is, it doesn&apos;t matter how smart you are. If it
+              doesn&apos;t agree with experiment, it&apos;s wrong.&rdquo;
+            </blockquote>
+            <p className="font-nav text-sm font-semibold not-italic tracking-[0.2em] text-white/80 lg:text-[length:max(13px,calc(0.85*var(--vw)))]">
+              — Richard P. Feynman
+            </p>
           </div>
-
         </div>
-
       </div>
     </section>
   );

@@ -140,7 +140,6 @@ export default function Hero() {
         </defs>
         <g id="grass-blades"></g>
       </svg>
-      <div id="layer-leaves" className="pointer-events-none absolute inset-0 z-10 overflow-hidden"></div>
 
       <div
         id="hero-ui"
