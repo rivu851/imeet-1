@@ -1,11 +1,13 @@
-// Stepped/pixelated chamfered corners — 14 px step at each corner
-export const PHOTO_CLIP =
-  "[clip-path:polygon(0_14px,14px_14px,14px_0,calc(100%-14px)_0,calc(100%-14px)_14px,100%_14px,100%_calc(100%-14px),calc(100%-14px)_calc(100%-14px),calc(100%-14px)_100%,14px_100%,14px_calc(100%-14px),0_calc(100%-14px))]";
+import Image from "next/image";
 
 export default function HodPhoto() {
   return (
-    <div className="flex aspect-[3/4] w-full flex-col items-center justify-end overflow-hidden bg-lime px-6 pb-10 text-center">
-     
-    </div>
+    <Image
+      src="/images/imeet/hod-portrait.png"
+      alt="Dr. Soumyadip Dhar, Head of the Department of Information Technology"
+      width={768}
+      height={768}
+      className="h-auto w-[min(100%,32rem)] object-contain"
+    />
   );
 }

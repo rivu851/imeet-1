@@ -3,10 +3,6 @@
 import { GRAIN, PAUSE_OFFSCREEN, TEXT_OUTLINE } from "@/components/home/styles";
 import HodPhoto from "./HodPhoto";
 
-// Stepped badge silhouette used by the desktop HOD reference.
-const STEPPED_CLIP =
-  "[clip-path:polygon(25%_0,75%_0,75%_10%,85%_10%,85%_20%,95%_20%,95%_30%,100%_30%,100%_70%,95%_70%,95%_80%,85%_80%,85%_90%,75%_90%,75%_100%,25%_100%,25%_90%,15%_90%,15%_80%,5%_80%,5%_70%,0_70%,0_30%,5%_30%,5%_20%,15%_20%,15%_10%,25%_10%)]";
-
 // Stepped tag silhouette matching the desktop reference label.
 const TAG_CLIP =
   "[clip-path:polygon(3%_0,97%_0,97%_12%,100%_12%,100%_88%,97%_88%,97%_100%,3%_100%,3%_88%,0_88%,0_12%,3%_12%)]";
@@ -56,16 +52,7 @@ export default function HodDeskPage() {
         {/* ── RIGHT COLUMN — photo frame (centered against text) ──── */}
         <div className="order-first flex flex-col items-center justify-center lg:order-last lg:col-span-5">
           <div className="js-reveal [&.is-in]:animate-reveal flex flex-col items-center">
-            {/* LIME filled stepped geometric badge matching Figma */}
-            <div
-              className={`relative flex aspect-square w-[270px] items-center justify-center bg-lime drop-shadow-[0_0_40px_rgba(190,246,85,0.25)] sm:w-[310px] lg:w-[350px] xl:w-[370px] ${STEPPED_CLIP}`}
-            >
-              <div
-                className="relative flex h-full w-[72%] items-center justify-center overflow-hidden"
-              >
-                <HodPhoto />
-              </div>
-            </div>
+            <HodPhoto />
 
             {/* Muted caption */}
             <p className="mt-4 text-center font-nav text-xs font-semibold tracking-[0.35em] text-mist">
