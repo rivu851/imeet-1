@@ -132,7 +132,11 @@ export default function Gallery() {
   return (
     <>
       <section id="gallery" className="relative overflow-clip bg-midnight py-24 md:py-32">
-        <GalleryBackdrop src="/images/imeet/bg-gallery.webp" position="object-[50%_35%]" />
+        <GalleryBackdrop
+          src="/images/imeet/bg-gallery.webp"
+          mobileSrc="/images/imeet/bg-gallery-mobile.webp"
+          position="object-[50%_35%]"
+        />
         <div className="pointer-events-none absolute bottom-[-10%] left-[-8%] h-[600px] w-[600px] bg-[radial-gradient(circle,rgba(197,42,44,0.12),transparent_65%)]"></div>
         <div data-petals="8" className="pointer-events-none absolute inset-0 overflow-hidden"></div>
         <div className="relative mx-auto w-[calc(100%-3rem)] lg:w-[62vw] lg:max-w-[1100px]">
