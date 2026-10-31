@@ -3,9 +3,9 @@ import Countdown from "@/components/home/Countdown";
 import Effects from "@/components/home/Effects";
 import EventHighlights from "@/components/events/EventHighlights";
 import HeroSection from "@/components/home/HeroSection";
+import HodDeskPage from "@/components/hod-desk/HodDeskPage";
 import Marquee from "@/components/home/Marquee";
 import Pillars from "@/components/home/Pillars";
-import HodsDesk from "@/components/hod-desk/HodsDesk";
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 import RegisterSection from "@/components/signup/RegisterSection";
@@ -17,9 +17,9 @@ export default function Home() {
       <main id="main">
         <HeroSection />
         <AboutSection />
+        <HodDeskPage />
         <Marquee />
         <EventHighlights />
-        <HodsDesk />
         <Pillars />
         <Countdown />
         <RegisterSection />
