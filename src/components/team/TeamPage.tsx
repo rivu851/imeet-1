@@ -25,8 +25,8 @@ export default function TeamPage() {
       {/* ── High-Resolution Crystal Clear Background ── */}
       <div className="fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
         <img
-          src="/images/team/team-bg.jpg"
-          alt="IMEET 2026 Team Background - Red Moon and Lake Gathering"
+          src="/images/team/team-hero.png"
+          alt="IMEET 2026 team background"
           className="h-full w-full object-cover object-center"
         />
 
