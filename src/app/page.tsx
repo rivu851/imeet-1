@@ -1,7 +1,7 @@
 import AboutSection from "@/components/home/AboutSection";
 import Countdown from "@/components/home/Countdown";
 import Effects from "@/components/home/Effects";
-import EventHighlights from "@/components/events/EventHighlights";
+import EventCategories from "@/components/events/EventCategories";
 import HeroSection from "@/components/home/HeroSection";
 import HodDeskPage from "@/components/hod-desk/HodDeskPage";
 import Marquee from "@/components/home/Marquee";
@@ -23,7 +23,7 @@ export default function Home() {
         </div>
         <HodDeskPage />
         <Marquee />
-        <EventHighlights />
+        <EventCategories />
         <Pillars />
         <Countdown />
         <RegisterSection />

@@ -35,7 +35,7 @@ export default function HodDeskPage() {
           className="absolute inset-0 lg:hidden"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(8,11,20,0.55) 0%, rgba(8,11,20,0.72) 35%, #080b14 100%)",
+              "linear-gradient(to bottom, rgba(8,11,20,0.45) 0%, rgba(8,11,20,0.2) 30%, rgba(8,11,20,0.35) 70%, rgba(8,11,20,0.85) 100%)",
           }}
         />
 
@@ -55,7 +55,7 @@ export default function HodDeskPage() {
       <div className={GRAIN} />
 
       {/* ── Main content grid: lines up with the About section on desktop ── */}
-      <div className="relative z-20 mx-auto grid w-full grid-cols-1 gap-8 lg:max-w-[calc(100*var(--vw))] lg:grid-cols-[minmax(0,1fr)_calc(29*var(--vw))] lg:items-start lg:gap-x-[calc(4*var(--vw))] lg:gap-y-[calc(1.8*var(--vw))] lg:px-[calc(5.4*var(--vw))]">
+      <div className="relative z-20 mx-auto grid w-full grid-cols-1 gap-8 lg:max-w-[calc(100*var(--vw))] lg:grid-cols-[minmax(0,1fr)_calc(24*var(--vw))] lg:items-start lg:gap-x-[calc(3*var(--vw))] lg:gap-y-[calc(1.8*var(--vw))] lg:pl-[calc(5.4*var(--vw))] lg:pr-[calc(18*var(--vw))]">
         {/* The title leads on mobile; desktop places it beside the portrait. */}
         <div className="flex flex-col items-start gap-5 lg:col-start-1 lg:row-start-1 lg:gap-[calc(1.5*var(--vw))]">
           <span
@@ -64,7 +64,7 @@ export default function HodDeskPage() {
             From the HOD&apos;s Desk
           </span>
 
-          <h1 className="js-reveal [&.is-in]:animate-reveal font-display whitespace-nowrap text-[10vw] uppercase leading-none sm:text-[9.3vw] text-white lg:text-[length:calc(4.3*var(--vw))] lg:leading-[1.05]">
+          <h1 className="js-reveal [&.is-in]:animate-reveal font-display whitespace-nowrap text-[10vw] uppercase leading-none sm:text-[9.3vw] text-white lg:text-[length:calc(3.9*var(--vw))] lg:leading-[1.05]">
             Guiding Minds
             <br />
             {/* outer edge only: the stroke is painted under a dark fill, so the font's inner overlaps stay hidden */}
@@ -75,21 +75,21 @@ export default function HodDeskPage() {
         </div>
 
         {/* ── Portrait: second on mobile, right column on desktop ─── */}
-        <div className="js-reveal [&.is-in]:animate-reveal flex flex-col items-center lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
+        <div className="js-reveal [&.is-in]:animate-reveal flex flex-col items-start md:items-center lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
           <HodPhoto />
 
-          <div className="-mt-2 w-[min(88%,19.5rem)] border border-moon/15 bg-midnight/85 px-4 py-3 text-center backdrop-blur-sm lg:w-[88%] lg:py-[calc(0.9*var(--vw))]">
-            <p className="font-nav text-lg font-bold uppercase tracking-[0.12em] text-white lg:text-[length:max(16px,calc(1.25*var(--vw)))]">
+          <div className="-mt-2 w-[min(58%,19.5rem)] border border-moon/15 bg-midnight/85 px-2 py-2.5 text-center backdrop-blur-sm md:px-4 md:py-3 lg:w-[88%] lg:py-[calc(0.9*var(--vw))]">
+            <p className="font-nav text-sm font-bold uppercase tracking-[0.08em] text-white md:text-lg md:tracking-[0.12em] lg:text-[length:max(16px,calc(1.25*var(--vw)))]">
               Dr. Soumyadip Dhar
             </p>
-            <p className="mt-1 font-nav text-xs font-semibold uppercase tracking-[0.25em] text-sakura/80 lg:text-[length:max(11px,calc(0.72*var(--vw)))]">
+            <p className="mt-1 font-nav text-[10px] font-semibold uppercase tracking-[0.12em] text-sakura/80 md:text-xs md:tracking-[0.25em] lg:text-[length:max(11px,calc(0.72*var(--vw)))]">
               Head of Department, IT
             </p>
           </div>
         </div>
 
         {/* ── Body content: third on mobile, below the title on desktop ─ */}
-        <div className="flex flex-col gap-6 text-base font-light leading-relaxed text-white/90 md:text-lg lg:col-start-1 lg:row-start-2 lg:gap-[calc(1.5*var(--vw))] lg:text-[length:max(15px,calc(1.1*var(--vw)))] lg:leading-[1.55]">
+        <div className="flex flex-col gap-6 text-base font-light leading-relaxed text-white/90 border border-moon/10 bg-midnight/80 p-4 backdrop-blur-sm md:p-6 md:text-lg lg:col-start-1 lg:row-start-2 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none lg:gap-[calc(1.5*var(--vw))] lg:text-[length:max(15px,calc(1.1*var(--vw)))] lg:leading-[1.55]">
           {/* Credentials */}
           <div className="js-reveal [&.is-in]:animate-reveal space-y-1">
             <p className="font-normal text-white">Associate Professor &amp; Head, Department of Information Technology</p>
