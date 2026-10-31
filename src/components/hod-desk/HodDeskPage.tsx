@@ -11,7 +11,7 @@ export default function HodDeskPage() {
   return (
     <section
       id="hod-desk-page"
-      className="relative flex min-h-screen items-center overflow-hidden bg-midnight px-6 py-24 sm:px-10 md:px-16 md:py-28 lg:px-20"
+      className="relative flex min-h-screen items-center overflow-hidden bg-midnight px-4 py-16 sm:px-10 sm:py-20 md:px-16 md:py-28 lg:px-20"
       aria-label="HOD's Desk"
     >
       {/* ── Background scene: background.jpg clearly visible ─────── */}
@@ -22,12 +22,19 @@ export default function HodDeskPage() {
           className="h-full w-full object-cover object-[75%_center] opacity-95"
         />
 
-        {/* Dark gradient on the left ~55% only, fading smoothly into transparent on the right */}
+        {/* Dark gradients keep the content legible across desktop and mobile crops. */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden md:block"
           style={{
             background:
               "linear-gradient(to right, #080b14 0%, rgba(8,11,20,0.92) 32%, rgba(8,11,20,0.72) 46%, rgba(8,11,20,0.2) 56%, transparent 68%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(8,11,20,0.55) 0%, rgba(8,11,20,0.72) 35%, #080b14 100%)",
           }}
         />
 
@@ -47,10 +54,30 @@ export default function HodDeskPage() {
       <div className={GRAIN} />
 
       {/* ── Main content grid: max-w-1440, vertically centered ───── */}
-      <div className="relative z-20 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14 xl:gap-16">
+      <div className="relative z-20 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-7 md:gap-10 lg:grid-cols-12 lg:gap-14 xl:gap-16">
+        {/* The title leads on mobile; desktop places it beside the portrait. */}
+        <div className="flex flex-col gap-6 lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:gap-7">
+          <div className="js-reveal [&.is-in]:animate-reveal flex items-center">
+            <span
+              className={`inline-flex items-center border border-tag-cyan px-6 py-2 font-nav text-[13px] font-bold uppercase tracking-[0.25em] text-white md:text-[14px] ${TAG_CLIP}`}
+            >
+              From the HOD&apos;s Desk
+            </span>
+          </div>
 
-        {/* ── RIGHT COLUMN — photo frame (centered against text) ──── */}
-        <div className="order-first flex flex-col items-center justify-center lg:order-last lg:col-span-5">
+          <h1 className="js-reveal [&.is-in]:animate-reveal font-display text-[clamp(2.35rem,3.8vw,4.5rem)] uppercase leading-[0.92] text-white">
+            GUIDING
+            <br />
+            MINDS
+            <br />
+            <span className={TEXT_OUTLINE}>BEYOND</span>
+            <br />
+            TECHNOLOGY.
+          </h1>
+        </div>
+
+        {/* ── Portrait: second on mobile, right column on desktop ─── */}
+        <div className="flex flex-col items-center justify-center lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
           <div className="js-reveal [&.is-in]:animate-reveal flex flex-col items-center">
             <HodPhoto />
 
@@ -61,30 +88,9 @@ export default function HodDeskPage() {
           </div>
         </div>
 
-        {/* ── LEFT COLUMN — text content ─────────────────────────── */}
-        <div className="flex flex-col gap-6 lg:col-span-7 lg:gap-7">
-
-          {/* 1. Stepped tag outline */}
-          <div className="js-reveal [&.is-in]:animate-reveal flex items-center">
-            <span
-              className={`inline-flex items-center border border-tag-cyan px-6 py-2 font-nav text-[13px] font-bold uppercase tracking-[0.25em] text-white md:text-[14px] ${TAG_CLIP}`}
-            >
-              From the HOD&apos;s Desk
-            </span>
-          </div>
-
-          {/* 2. Heading: clamped to ~45% width, tight leading, hollow BEYOND */}
-          <h1 className="js-reveal [&.is-in]:animate-reveal font-display text-[clamp(2.35rem,3.8vw,4.5rem)] uppercase leading-[0.92] text-white">
-            GUIDING
-            <br />
-            MINDS
-            <br />
-            <span className={TEXT_OUTLINE}>BEYOND</span>
-            <br />
-            TECHNOLOGY.
-          </h1>
-
-          {/* 3. Credentials: white text, ~18px, line-height ~1.5 */}
+        {/* ── Body content: third on mobile, below the title on desktop ─ */}
+        <div className="flex flex-col gap-6 lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:gap-7">
+          {/* Credentials */}
           <div className="js-reveal [&.is-in]:animate-reveal space-y-1.5 text-base font-light leading-[1.5] text-white md:text-[18px]">
             <p>
               Ph.D. (Tech.), Computer Science and Engineering,
@@ -98,14 +104,12 @@ export default function HodDeskPage() {
             </p>
           </div>
 
-          {/* 4. Bio paragraph: white text, ~18px, line-height ~1.5 */}
           <p className="js-reveal [&.is-in]:animate-reveal max-w-xl text-base font-light leading-[1.5] text-white md:text-[18px]">
             Dr. Soumyadip Dhar leads the Department of Information Technology,
             fostering academic excellence, innovation, and practical learning to
             prepare students for the evolving world of technology.
           </p>
 
-          {/* 5. Quote block: red quote icon, vertical line, Feynman quote */}
           <div className="js-reveal [&.is-in]:animate-reveal flex gap-4 border-l-2 border-vermilion pl-5">
             <div className="flex flex-col gap-2.5">
               <i
