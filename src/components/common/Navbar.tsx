@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const LINKS = [
@@ -15,7 +15,9 @@ const LINKS = [
 export default function Header() {
   const [hiddenByScroll, setHiddenByScroll] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const profileRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -31,6 +33,26 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!profileOpen) return;
+
+    const closeOnOutsideClick = (event: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setProfileOpen(false);
+    };
+
+    document.addEventListener("mousedown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("mousedown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [profileOpen]);
 
   const closeOnMobile = () => {
     if (window.innerWidth < 1024) setMenuOpen(false);
@@ -79,6 +101,59 @@ export default function Header() {
               </Link>
             </li>
           ))}
+          <li ref={profileRef} className="relative border-b border-moon/10 py-4 lg:border-0 lg:py-0">
+            <button
+              type="button"
+              onClick={() => setProfileOpen((open) => !open)}
+              className="group flex size-10 items-center justify-center rounded-full border border-moon/25 bg-midnight/70 text-moon transition-all duration-300 hover:border-vermilion hover:text-vermilion hover:shadow-[0_0_16px_rgba(197,42,44,0.3)] lg:size-11"
+              aria-label="Open profile menu for Alex Morgan"
+              aria-expanded={profileOpen}
+              aria-haspopup="menu"
+            >
+              <i className="fa-solid fa-user text-base" aria-hidden="true"></i>
+            </button>
+            {profileOpen && (
+              <div
+                role="menu"
+                aria-label="Profile menu"
+                className="absolute right-0 top-full z-50 mt-3 w-52 border border-vermilion/35 bg-midnight/95 p-2 font-display text-xs uppercase tracking-[0.16em] text-moon shadow-[0_12px_36px_rgba(0,0,0,0.55),0_0_18px_rgba(197,42,44,0.12)] backdrop-blur-md [clip-path:polygon(0_0,100%_0,100%_calc(100%_-_10px),calc(100%_-_10px)_100%,0_100%)]"
+              >
+                <div className="mb-1 flex items-center gap-3 border-b border-moon/10 px-3 py-3">
+                  <span className="flex size-8 items-center justify-center rounded-full border border-vermilion/50 bg-vermilion/10 text-vermilion">
+                    <i className="fa-solid fa-user text-xs" aria-hidden="true"></i>
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-[10px] text-moon/60">Signed in as</span>
+                    <span className="block truncate text-[11px]">Alex Morgan</span>
+                  </span>
+                </div>
+                <Link
+                  href="/profile"
+                  role="menuitem"
+                  onClick={() => { setProfileOpen(false); closeOnMobile(); }}
+                  className="block px-3 py-3 transition-colors hover:bg-vermilion/10 hover:text-vermilion"
+                >
+                  My Profile
+                </Link>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => setProfileOpen(false)}
+                  className="block w-full px-3 py-3 text-left transition-colors hover:bg-vermilion/10 hover:text-vermilion"
+                >
+                  Settings
+                </button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => setProfileOpen(false)}
+                  className="block w-full px-3 py-3 text-left text-vermilion/90 transition-colors hover:bg-vermilion/10 hover:text-vermilion"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </li>
         </ul>
         <button
           id="menu-toggle"

@@ -1,0 +1,47 @@
+export default function ProfilePage() {
+  return (
+    <main className="relative min-h-svh overflow-hidden bg-midnight text-moon">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[url('/images/imeet/moonlight%20with%20sakura.png')] bg-cover bg-[center_45%]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,9,17,0.48),rgba(5,9,17,0.82)_48%,rgba(5,9,17,0.92)),linear-gradient(0deg,rgba(5,9,17,0.55),transparent_55%,rgba(5,9,17,0.35)]"
+      />
+
+      <div className="relative z-10 mx-auto grid min-h-svh max-w-[1680px] grid-cols-1 items-center gap-10 px-6 pb-14 pt-32 md:px-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 lg:px-16 lg:pb-10 lg:pt-[calc(165*var(--u))]">
+        <section className="relative flex min-h-[48svh] items-center pl-16 md:pl-20 lg:min-h-[70svh] lg:pl-24">
+          <div className="absolute left-0 top-1/2 flex -translate-y-1/2 flex-col items-center text-center">
+            <span className="font-nav text-sm font-bold tracking-[0.15em] text-red-hi">01</span>
+            <span className="my-3 h-20 w-px bg-gradient-to-b from-red-hi/80 via-moon/50 to-moon/10 md:h-28" />
+            <span className="font-jp text-xs tracking-[0.18em] text-moon/75">プロフィール</span>
+            <span className="mt-4 [writing-mode:vertical-rl] rotate-180 font-nav text-xs font-semibold tracking-[0.34em] text-moon/75">
+              PROFILE
+            </span>
+          </div>
+
+          <div className="max-w-2xl">
+            <h1 className="font-display uppercase leading-[0.8] tracking-[0.02em] text-white">
+              <span className="block text-[clamp(5rem,13vw,10rem)]">MY</span>
+              <span className="mt-3 flex items-end gap-3 whitespace-nowrap text-[clamp(3.35rem,9vw,7.6rem)]">
+                <span className="text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.9)] md:[-webkit-text-stroke:2px_rgba(255,255,255,0.9)]">
+                  PROFILE
+                </span>
+                <span aria-hidden="true" className="mb-[0.08em] size-[0.16em] shrink-0 bg-red-hi shadow-[0_0_18px_rgba(208,40,43,0.55)]" />
+              </span>
+            </h1>
+            <p className="mt-7 max-w-lg font-body text-base leading-relaxed text-moon/75 md:mt-9 md:text-xl">
+              Manage your ImeeT&apos;26 participant account.
+            </p>
+          </div>
+        </section>
+
+        <section
+          aria-label="Profile details placeholder"
+          className="min-h-[42svh] rounded-sm border border-moon/15 bg-midnight/25 shadow-[0_20px_70px_rgba(0,0,0,0.18)] backdrop-blur-[2px] lg:min-h-[68svh]"
+        />
+      </div>
+    </main>
+  );
+}
