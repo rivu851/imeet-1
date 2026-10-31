@@ -3,10 +3,10 @@
 import FooterWordmark from "./FooterWordmark";
 
 const EXPLORE = [
-  { href: "#about", label: "About" },
-  { href: "#events", label: "Events" },
-  { href: "#hods-desk", label: "HOD's Desk" },
-  { href: "#gallery", label: "Gallery" },
+  { href: "/teams", label: "Teams" },
+  { href: "/events", label: "Events" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/signup", label: "Sign Up" },
 ];
 
 const CONNECT = [
