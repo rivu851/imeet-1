@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { PLACEHOLDER_USER } from "@/data/profileUser";
 
 const LINKS = [
   { href: "/", label: "HOME" },
@@ -106,7 +107,7 @@ export default function Header() {
               type="button"
               onClick={() => setProfileOpen((open) => !open)}
               className="group flex size-10 items-center justify-center rounded-full border border-moon/25 bg-midnight/70 text-moon transition-all duration-300 hover:border-vermilion hover:text-vermilion hover:shadow-[0_0_16px_rgba(197,42,44,0.3)] lg:size-11"
-              aria-label="Open profile menu for Alex Morgan"
+              aria-label={`Open profile menu for ${PLACEHOLDER_USER.name}`}
               aria-expanded={profileOpen}
               aria-haspopup="menu"
             >
@@ -116,7 +117,7 @@ export default function Header() {
               <div
                 role="menu"
                 aria-label="Profile menu"
-                className="absolute right-0 top-full z-50 mt-3 w-52 border border-vermilion/35 bg-midnight/95 p-2 font-display text-xs uppercase tracking-[0.16em] text-moon shadow-[0_12px_36px_rgba(0,0,0,0.55),0_0_18px_rgba(197,42,44,0.12)] backdrop-blur-md [clip-path:polygon(0_0,100%_0,100%_calc(100%_-_10px),calc(100%_-_10px)_100%,0_100%)]"
+                className="absolute right-0 top-full z-[100] mt-3 w-52 border border-vermilion/35 bg-midnight/98 p-2 font-display text-xs uppercase tracking-[0.16em] text-moon shadow-[0_12px_36px_rgba(0,0,0,0.65),0_0_18px_rgba(197,42,44,0.16)] backdrop-blur-xl [clip-path:polygon(0_0,100%_0,100%_calc(100%_-_10px),calc(100%_-_10px)_100%,0_100%)]"
               >
                 <div className="mb-1 flex items-center gap-3 border-b border-moon/10 px-3 py-3">
                   <span className="flex size-8 items-center justify-center rounded-full border border-vermilion/50 bg-vermilion/10 text-vermilion">
@@ -124,7 +125,7 @@ export default function Header() {
                   </span>
                   <span className="min-w-0">
                     <span className="block truncate text-[10px] text-moon/60">Signed in as</span>
-                    <span className="block truncate text-[11px]">Alex Morgan</span>
+                    <span className="block truncate text-[11px]">{PLACEHOLDER_USER.name}</span>
                   </span>
                 </div>
                 <Link
@@ -135,14 +136,6 @@ export default function Header() {
                 >
                   My Profile
                 </Link>
-                <button
-                  type="button"
-                  role="menuitem"
-                  onClick={() => setProfileOpen(false)}
-                  className="block w-full px-3 py-3 text-left transition-colors hover:bg-vermilion/10 hover:text-vermilion"
-                >
-                  Settings
-                </button>
                 <button
                   type="button"
                   role="menuitem"
