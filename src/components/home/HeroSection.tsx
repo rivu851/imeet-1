@@ -166,17 +166,17 @@ export default function Hero() {
 
         <div className="absolute left-1/2 top-[67.4%] flex w-[calc(70*var(--pu))] -translate-x-1/2 hero-wide:w-auto hero-wide:translate-x-0 flex-col gap-[calc(2.4*var(--pu))] hero-wide:left-auto hero-wide:right-[calc(70*var(--u))] hero-wide:top-[calc(627*var(--u))] hero-wide:flex-row hero-wide:items-center hero-wide:gap-[calc(18*var(--u))]">
           <a
-            href="#"
+            href="#events"
             className={`${BUTTON} bg-[linear-gradient(180deg,#d0282b,#a8181b_55%,#5e090b)] [filter:drop-shadow(0_6px_16px_rgba(120,12,14,0.55))] [&:hover]:[filter:drop-shadow(0_6px_22px_rgba(208,40,43,0.6))_brightness(1.12)]`}
-            title="Official registration link to be announced"
+            title="Explore event categories"
           >
-            GET TICKETS <i className={BUTTON_ICON} aria-hidden="true"></i>
+            EXPLORE EVENTS <i className={BUTTON_ICON} aria-hidden="true"></i>
           </a>
           <a
-            href="#events"
+            href="/gallery"
             className={`${BUTTON} isolate bg-silver before:absolute before:inset-px before:z-[-1] before:bg-[rgba(5,12,30,0.75)] before:[clip-path:inherit] before:[transition:background-color_0.3s_ease] [&:hover]:bg-ivory [&:hover]:before:bg-[rgba(14,26,54,0.85)] hero-wide:before:inset-[max(1px,calc(1.5*var(--u)))]`}
           >
-            EXPLORE EVENTS
+            VIEW GALLERY
           </a>
         </div>
 
