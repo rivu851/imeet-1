@@ -1,15 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileCard from "@/components/profile/ProfileCard";
-import { PLACEHOLDER_USER, REGISTERED_EVENTS, type ProfileUser } from "@/data/profileUser";
+import type { ProfileUser, RegisteredEvent } from "@/data/profileUser";
+import { ApiError, getMe } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<ProfileUser>(PLACEHOLDER_USER);
+  const [user, setUser] = useState<ProfileUser | null>(null);
+  const [events, setEvents] = useState<RegisteredEvent[]>([]);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [message, setMessage] = useState("Loading your participant account…");
   const [view, setView] = useState<"profile" | "events">("profile");
+  const router = useRouter();
+
+  useEffect(() => { getMe().then((account) => {
+    const profile = account.profile;
+    setImageUrl(profile?.image_url || null);
+    setUser({ name: profile?.name || account.user.name || "", email: profile?.email || account.user.email, contactNumber: profile?.contact_no || "", department: profile?.dept || "", year: profile?.year ? `${profile.year}${profile.year === 1 ? "st" : profile.year === 2 ? "nd" : profile.year === 3 ? "rd" : "th"} Year` : "", rollNumber: profile?.college_roll || "" });
+    setEvents((account.participatedEvents || []).map((item) => ({ id: String(item.event_id), name: item.name || `Event ${item.event_id}`, date: item.date || "To be announced", time: "", venue: item.venue || "To be announced", status: "Confirmed", ticketId: item.team_name || "Registered" })));
+    setMessage("");
+  }).catch((error: unknown) => { if (error instanceof ApiError && error.status === 401) { router.push(`/auth/login?returnTo=${encodeURIComponent("/profile")}`); return; } setMessage(error instanceof Error ? error.message : "Could not load your account."); }); }, [router]);
 
   const saveUser = async (formData: ProfileUser) => {
-    setUser({ ...user, ...formData });
+    const years: Record<string, number> = { "1st Year": 1, "2nd Year": 2, "3rd Year": 3, "4th Year": 4 };
+    const department = ({ "Information Technology": "IT", "Computer Science and Engineering": "CSE", "Electronics and Communication Engineering": "ECE" } as Record<string, string>)[formData.department] || formData.department;
+    const response = await fetch("/api/profile", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: formData.name, contact_no: formData.contactNumber, dept: department, year: years[formData.year] || Number.parseInt(formData.year, 10), college_roll: formData.rollNumber }) });
+    const result = await response.json().catch(() => null);
+    if (!response.ok) throw new Error(result?.message || "Profile could not be saved.");
+    setUser({ ...formData, department });
+    const returnTo = new URLSearchParams(window.location.search).get("returnTo");
+    if (returnTo && /^\/events\/[1-9]\d*(?:\/register)?$/.test(returnTo)) router.push(returnTo.replace(/\/register$/, ""));
+  };
+
+  const uploadPhoto = async (file: File) => {
+    const upload = new FormData();
+    upload.append("file", file, file.name);
+    const response = await fetch("/api/profile/photo", { method: "POST", credentials: "same-origin", body: upload });
+    const result = await response.json().catch(() => null);
+    if (!response.ok) throw new Error(result?.message || "Profile photo could not be saved. Please try again.");
+    if (typeof result?.image_url !== "string" || !result.image_url) throw new Error("The upload succeeded, but no image URL was returned.");
+    setImageUrl(result.image_url);
+    return result.image_url as string;
   };
 
   return (
@@ -46,17 +78,20 @@ export default function ProfilePage() {
             <p className="mt-7 max-w-lg font-body text-base leading-relaxed text-moon/75 md:mt-9 md:text-xl">
               Manage your ImeeT&apos;26 participant account.
             </p>
+            {user && !user.email.trim().toLowerCase().endsWith("@rcciit.org.in") && <p role="note" className="mt-5 max-w-lg border border-amber-300/25 bg-amber-300/10 p-4 text-sm leading-relaxed text-amber-100">You are signed in with {user.email}. Event registration requires a verified @rcciit.org.in account. Sign out and use your college account to register.</p>}
           </div>
         </section>
 
-        <ProfileCard
+        {!user ? <p role={message.startsWith("Loading") ? "status" : "alert"} className="rounded-xl border border-moon/15 bg-midnight/65 p-6">{message}</p> : <ProfileCard
           user={user}
+          avatarUrl={imageUrl}
           onSaveUser={saveUser}
+          onUploadPhoto={uploadPhoto}
           view={view}
-          events={REGISTERED_EVENTS}
+          events={events}
           onShowEvents={() => setView("events")}
           onBackToProfile={() => setView("profile")}
-        />
+        />}
       </div>
     </main>
   );

@@ -3,7 +3,8 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useRef, useState } from "react";
-import { galleryItems, groups, type GalleryItem } from "@/data/gallery";
+import { groups, type GalleryItem } from "@/data/gallery";
+import { apiRequest, type ApiGalleryItem } from "@/lib/api";
 import { lenis } from "@/components/common/SmoothScroll";
 import GalleryBackdrop from "@/components/gallery/GalleryBackdrop";
 import GalleryFilters from "@/components/gallery/GalleryFilters";
@@ -13,7 +14,10 @@ const wrap = (index: number, items: GalleryItem[]) => (index + items.length) % i
 
 export default function Gallery() {
   const [open, setOpen] = useState<number | null>(null);
-  const [lightboxItems, setLightboxItems] = useState<GalleryItem[]>(galleryItems);
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
+  const [galleryError, setGalleryError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [lightboxItems, setLightboxItems] = useState<GalleryItem[]>([]);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const [visibleCounts, setVisibleCounts] = useState<Record<string, number>>({});
   const [pendingFocusId, setPendingFocusId] = useState<string | null>(null);
@@ -21,6 +25,12 @@ export default function Gallery() {
   const activeTileRef = useRef<HTMLButtonElement | null>(null);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
   const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => { apiRequest<{ data: ApiGalleryItem[] }>("/api/gallery").then(({ data }) => {
+    const items = (data || []).map((item) => ({ id: item.id, src: item.image_url_large || item.image_url, alt: item.caption || item.title, title: item.title, year: String(item.year) as "2026", w: 1200, h: 850, group: /2|prize|closing/i.test(item.category) ? "day-2" : "day-1", featured: true, position: "50% 50%" }));
+    setGalleryItems(items);
+    setLightboxItems(items);
+  }).catch((error: unknown) => setGalleryError(error instanceof Error ? error.message : "Gallery could not be loaded.")).finally(() => setLoading(false)); }, []);
 
   const registerTile = (item: GalleryItem, element: HTMLButtonElement | null) => {
     if (element) tileRefs.current.set(item.id, element);
@@ -110,9 +120,10 @@ export default function Gallery() {
     if (Math.abs(distance) >= 50) move(distance < 0 ? 1 : -1);
   };
 
-  const current = open === null ? lightboxItems[0] : lightboxItems[open];
-  const previous = lightboxItems[wrap((open ?? 0) - 1, lightboxItems)];
-  const next = lightboxItems[wrap((open ?? 0) + 1, lightboxItems)];
+  const emptyItem: GalleryItem = { id: "", src: "", alt: "", title: "", year: "2026", w: 1, h: 1, group: "", featured: false, position: "50% 50%" };
+  const current = open === null ? lightboxItems[0] ?? emptyItem : lightboxItems[open] ?? emptyItem;
+  const previous = lightboxItems.length ? lightboxItems[wrap((open ?? 0) - 1, lightboxItems)] : emptyItem;
+  const next = lightboxItems.length ? lightboxItems[wrap((open ?? 0) + 1, lightboxItems)] : emptyItem;
   const visibleGroups = activeGroup ? groups.filter((group) => group.id === activeGroup) : groups;
   const archiveItemsForGroup = (groupId: string) => galleryItems.filter((item) => item.group === groupId);
   const visibleArchiveItems = visibleGroups.flatMap((group) => archiveItemsForGroup(group.id).slice(0, visibleCounts[group.id] ?? 12));
@@ -149,6 +160,9 @@ export default function Gallery() {
           </div>
 
           <GalleryFilters groups={groups} activeGroup={activeGroup} onChange={handleFilterChange} />
+          {loading && <p role="status" className="mt-8 text-sm text-moon/70">Loading gallery…</p>}
+          {galleryError && <p role="alert" className="mt-8 text-sm text-red-200">{galleryError}</p>}
+          {!loading && !galleryError && galleryItems.length === 0 && <p className="mt-8 text-sm text-moon/70">No gallery images are available yet.</p>}
           <div aria-live="polite" className="sr-only">
             Showing {visibleArchiveItems.length} of {activeGroup ? archiveItemsForGroup(activeGroup).length : galleryItems.length}
           </div>

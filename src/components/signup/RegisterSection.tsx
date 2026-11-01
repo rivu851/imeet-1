@@ -31,8 +31,8 @@ export default function Register() {
           <div className="js-reveal [&.is-in]:animate-reveal flex flex-wrap items-center gap-x-8 gap-y-5">
             <a
               id="cta-register"
-              href="#"
-              title="Official registration link to be announced"
+              href="/auth/login?screen_hint=signup&returnTo=%2Fprofile"
+              title="Sign up to create your participant profile"
               className="group inline-flex items-center gap-4 border border-vermilion/70 bg-crimson px-8 py-5 font-nav text-[13px] font-bold tracking-[0.34em] text-moon shadow-[0_10px_40px_-12px_rgba(169,22,25,0.8)] transition-colors duration-500 hover:bg-vermilion"
             >
               REGISTER FOR IMEET <i className="fa-solid fa-arrow-right-long text-xs [transition:transform_0.45s_cubic-bezier(0.2,0.7,0.2,1)] [.group:hover_&]:[transform:translateX(6px)]"></i>
@@ -47,7 +47,7 @@ export default function Register() {
           </div>
         </div>
         <p className="mt-8 flex items-center gap-3 text-xs text-mist">
-          <i className="fa-solid fa-circle-info text-amber"></i>Official registration link will be announced.
+          <i className="fa-solid fa-circle-info text-amber"></i>Sign in, complete your participant profile, then register for events.
         </p>
       </div>
     </section>
