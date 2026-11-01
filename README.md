@@ -13,6 +13,14 @@ npm run dev
 
 Then open http://localhost:3000.
 
+## Backend and deployment
+
+The frontend proxies `/api/*` and `/auth/*` to the Express service using a server-side rewrite. For local development, copy `.env.example` to `.env.local`; the default points to `http://localhost:3412`. Production defaults to `https://imeet-be-n19i.onrender.com`; set the server-only `BACKEND_URL` in the deployment environment to override it.
+
+For non-Vercel production deployments, set the server-only `BACKEND_URL` to the publicly reachable HTTPS origin of the Express service. Do not use `localhost`, a private IP, or a `NEXT_PUBLIC_` variable.
+
+The Express deployment must set `AUTH0_BASE_URL` and `PUBLIC_FRONTEND_URL` to the deployed frontend origin. Add that frontend origin's `/auth/callback` URL and origin to the Auth0 application's allowed callback and web origin settings.
+
 ## Structure
 
 - `src/app` - App Router pages for home, about, HOD desk, events, holidays, signup and contact; includes loading, error, not-found and favicon assets
