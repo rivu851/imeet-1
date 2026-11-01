@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode, type RefObject } from "react";
 import type { ProfileUser } from "@/data/profileUser";
 
 export type { ProfileUser } from "@/data/profileUser";
@@ -82,10 +82,22 @@ function EditField({
 function ProfilePictureBlock({
   avatarUrl,
   onAvatarChange,
+  onUpload,
+  photoPending,
+  photoMessage,
+  photoFailed,
+  hasPhoto,
+  inputRef,
   error,
 }: {
   avatarUrl: string | null;
   onAvatarChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onUpload: () => void;
+  photoPending: boolean;
+  photoMessage: string;
+  photoFailed: boolean;
+  hasPhoto: boolean;
+  inputRef: RefObject<HTMLInputElement | null>;
   error: string;
 }) {
   return (
@@ -108,12 +120,14 @@ function ProfilePictureBlock({
         <p className="mt-1 text-xs text-moon/45">Maximum file size: 5 MB</p>
         <FieldError id="profile-avatar-error">{error}</FieldError>
       </div>
+      <div className="flex flex-wrap items-center gap-2">
       <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-moon/25 bg-midnight/30 px-4 py-2.5 font-nav text-xs font-bold text-moon transition-colors hover:border-vermilion/70 hover:bg-vermilion/10 focus-within:outline-none focus-within:ring-2 focus-within:ring-vermilion">
-        <i className="fa-solid fa-upload" aria-hidden="true" />
-        Upload
+        <i className="fa-regular fa-image" aria-hidden="true" />
+        Choose photo
         <input
           className="sr-only"
           type="file"
+          ref={inputRef}
           accept="image/jpeg,image/png,image/webp"
           aria-label="Upload a profile picture"
           aria-describedby={error ? "profile-avatar-help profile-avatar-error" : "profile-avatar-help"}
@@ -121,6 +135,12 @@ function ProfilePictureBlock({
           onChange={onAvatarChange}
         />
       </label>
+      <button type="button" onClick={onUpload} disabled={!hasPhoto || photoPending || Boolean(error)} className="inline-flex items-center gap-2 rounded-lg border border-vermilion/70 bg-vermilion px-4 py-2.5 font-nav text-xs font-bold text-white transition-colors hover:bg-red-hi disabled:cursor-not-allowed disabled:opacity-45">
+        <i className={`fa-solid ${photoPending ? "fa-spinner animate-spin" : "fa-upload"}`} aria-hidden="true" />
+        {photoPending ? "Uploading…" : "Upload picture"}
+      </button>
+      </div>
+      {photoMessage && <p role={photoFailed ? "alert" : "status"} aria-live="polite" className={`w-full text-sm ${photoFailed ? "text-red-200" : "text-emerald-200"}`}>{photoMessage}</p>}
     </section>
   );
 }
@@ -134,11 +154,7 @@ function DepartmentField({
   onChange: (value: string) => void;
   error?: string;
 }) {
-  const departments = [
-    "Information Technology",
-    "Computer Science and Engineering",
-    "Electronics and Communication Engineering",
-  ];
+  const departments = ["IT", "CSE", "CSE AI", "ECE", "EE"];
   const errorId = error ? "profile-department-error" : undefined;
 
   return (
@@ -186,8 +202,8 @@ function YearField({
       <legend className="mb-2 block px-1 text-sm font-semibold text-white">
         Current Year <span className="ml-1 text-red-hi">*</span>
       </legend>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 px-1 py-1 sm:grid-cols-4 sm:gap-x-5">
-        {["1st Year", "2nd Year", "3rd Year", "4th Year"].map((option) => (
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 px-1 py-1 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-6">
+        {["1st Year", "2nd Year", "3rd Year", "4th Year", "5th Year", "6th Year"].map((option) => (
           <label key={option} className="inline-flex cursor-pointer items-center gap-2 text-sm text-moon/85">
             <input
               type="radio"
@@ -224,11 +240,13 @@ export default function ProfileEditForm({
   avatarUrl,
   onCancel,
   onSave,
+  onUploadPhoto,
 }: {
   user: ProfileUser;
   avatarUrl: string | null;
   onCancel: () => void;
-  onSave: (updatedUser: ProfileUser, avatarFile: File | null) => Promise<void>;
+  onSave: (updatedUser: ProfileUser) => Promise<void>;
+  onUploadPhoto: (file: File) => Promise<string>;
 }) {
   const [formUser, setFormUser] = useState(user);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -236,7 +254,12 @@ export default function ProfileEditForm({
   const [previewUrl, setPreviewUrl] = useState<string | null>(avatarUrl);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
+  const [photoPending, setPhotoPending] = useState(false);
+  const [photoMessage, setPhotoMessage] = useState("");
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const previewObjectUrl = useRef<string | null>(null);
+  const photoInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     return () => {
@@ -253,13 +276,17 @@ export default function ProfileEditForm({
   const handleAvatarChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+    setPhotoMessage("");
+    setPhotoFailed(false);
     const supportedTypes = ["image/jpeg", "image/png", "image/webp"];
     if (!supportedTypes.includes(file.type)) {
+      setAvatarFile(null);
       setAvatarError("Choose a JPEG, PNG, or WebP image.");
       event.target.value = "";
       return;
     }
     if (file.size > 5 * 1024 * 1024) {
+      setAvatarFile(null);
       setAvatarError("Image must be 5 MB or smaller.");
       event.target.value = "";
       return;
@@ -271,6 +298,28 @@ export default function ProfileEditForm({
     setPreviewUrl(previewObjectUrl.current);
   };
 
+  const handlePhotoUpload = async () => {
+    const file = avatarFile;
+    if (!file) { setPhotoFailed(true); setPhotoMessage("Choose a photo first."); return; }
+    setPhotoPending(true);
+    setPhotoMessage("");
+    setPhotoFailed(false);
+    try {
+      const savedUrl = await onUploadPhoto(file);
+      if (previewObjectUrl.current) URL.revokeObjectURL(previewObjectUrl.current);
+      previewObjectUrl.current = null;
+      setPreviewUrl(savedUrl);
+      setAvatarFile(null);
+      setPhotoMessage("Profile photo updated.");
+      if (photoInputRef.current) photoInputRef.current.value = "";
+    } catch (error) {
+      setPhotoFailed(true);
+      setPhotoMessage(error instanceof Error ? error.message : "Profile photo could not be saved. Please try again.");
+    } finally {
+      setPhotoPending(false);
+    }
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextErrors = validate(formUser);
@@ -278,8 +327,11 @@ export default function ProfileEditForm({
     if (Object.keys(nextErrors).length > 0 || saving) return;
 
     setSaving(true);
+    setSaveError("");
     try {
-      await onSave({ ...formUser, name: formUser.name.trim(), contactNumber: formUser.contactNumber.trim(), rollNumber: formUser.rollNumber.trim() }, avatarFile);
+      await onSave({ ...formUser, name: formUser.name.trim(), contactNumber: formUser.contactNumber.trim(), rollNumber: formUser.rollNumber.trim() });
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : "Profile could not be saved. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -289,7 +341,7 @@ export default function ProfileEditForm({
 
   return (
     <form onSubmit={handleSubmit} noValidate aria-busy={saving} className="space-y-5 sm:space-y-6">
-      <ProfilePictureBlock avatarUrl={previewUrl} onAvatarChange={handleAvatarChange} error={avatarError} />
+      <ProfilePictureBlock avatarUrl={previewUrl} onAvatarChange={handleAvatarChange} onUpload={handlePhotoUpload} photoPending={photoPending} photoMessage={photoMessage} photoFailed={photoFailed} hasPhoto={Boolean(avatarFile)} inputRef={photoInputRef} error={avatarError} />
 
       <EditSection title="Personal Information">
         <EditField
@@ -335,6 +387,8 @@ export default function ProfileEditForm({
           error={errors.rollNumber}
         />
       </EditSection>
+
+      {saveError && <p role="alert" className="rounded border border-red-300/30 bg-red-950/30 px-4 py-3 text-sm text-red-200">{saveError}</p>}
 
       <div className="flex flex-wrap justify-end gap-3 border-t border-moon/10 pt-5">
         <button

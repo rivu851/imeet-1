@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { CATEGORIES, TEAM_MEMBERS, type TeamMember } from "./teamData";
+/* eslint-disable @next/next/no-img-element */
+
+import { useEffect, useState } from "react";
+import { CATEGORIES, type TeamMember } from "./teamData";
+import { apiRequest, type ApiTeamMember } from "@/lib/api";
 import { PAUSE_OFFSCREEN } from "@/components/home/styles";
 
 const CARD_CLIP =
@@ -9,10 +12,18 @@ const CARD_CLIP =
 
 export default function TeamPage() {
   const [activeTab, setActiveTab] = useState<string>("all");
+  const [members, setMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  useEffect(() => { apiRequest<{ data: ApiTeamMember[] }>("/api/teams").then(({ data }) => setMembers((data || []).map((person) => {
+    const role = person.role.toLowerCase();
+    const category = /faculty|hod|advisor|mentor|patron/.test(role) ? "mentors" : /design|media/.test(role) ? "design" : /event|operation/.test(role) ? "events" : /pr|sponsor|public/.test(role) ? "pr" : /tech|web|developer/.test(role) ? "tech" : "core";
+    return { id: person.user_id, name: person.name, role: person.role, category, categoryLabel: CATEGORIES.find((entry) => entry.id === category)?.label || "Team", department: "IMEET 2026", spiritQuote: "", avatar: person.img_url || undefined, socials: { github: person.github || undefined, linkedin: person.linkedin || undefined, instagram: person.insta || undefined, email: person.email ? `mailto:${person.email}` : undefined } };
+  }))).catch((e: unknown) => setError(e instanceof Error ? e.message : "Could not load the team.")).finally(() => setLoading(false)); }, []);
 
   const groups = CATEGORIES.filter((c) => c.id !== "all" && (activeTab === "all" || activeTab === c.id)).map((c) => ({
     ...c,
-    members: TEAM_MEMBERS.filter((m) => m.category === c.id),
+    members: members.filter((m) => m.category === c.id),
   }));
 
   const ordered = groups.flatMap((group) => group.members);
@@ -70,6 +81,7 @@ export default function TeamPage() {
           })}
         </div>
 
+        {loading && <p role="status" className="mt-10">Loading team…</p>}{error && <p role="alert" className="mt-10">{error}</p>}{!loading && !error && members.length === 0 && <p className="mt-10 text-moon/70">No team members are available yet.</p>}
         <div className="mt-10 space-y-12 md:mt-14 md:space-y-16">
           {groups.map((group) => (
             <section key={group.id} aria-label={group.label}>
@@ -121,8 +133,8 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
 
         {/* Member Identity & Avatar Header */}
         <div className="mt-4 flex flex-col gap-3 md:mt-5 md:flex-row md:items-center md:gap-4">
-          <div className="relative flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-gradient-to-br from-midnight via-navy to-midnight font-display text-base tracking-wider text-moon shadow-inner transition-transform duration-300 group-hover:scale-105 group-hover:border-vermilion/70 group-hover:text-white md:size-14 md:text-lg">
-            {initials}
+          <div className="relative flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-gradient-to-br from-midnight via-navy to-midnight font-display text-base tracking-wider text-moon shadow-inner transition-transform duration-300 group-hover:scale-105 group-hover:border-vermilion/70 group-hover:text-white md:size-14 md:text-lg">
+            {member.avatar ? <img src={member.avatar} alt={`${member.name}`} className="absolute inset-0 size-full object-cover" /> : initials}
             <span className="absolute -bottom-1 -right-1 size-3 rounded-full border-2 border-midnight bg-tag-cyan" />
           </div>
 

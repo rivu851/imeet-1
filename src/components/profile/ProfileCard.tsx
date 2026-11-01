@@ -141,6 +141,8 @@ function AcademicInformation({ user }: { user: ProfileUser }) {
 export default function ProfileCard({
   user,
   onSaveUser,
+  onUploadPhoto,
+  avatarUrl: initialAvatarUrl,
   view,
   events,
   onShowEvents,
@@ -148,13 +150,15 @@ export default function ProfileCard({
 }: {
   user: ProfileUser;
   onSaveUser: (formData: ProfileUser) => Promise<void>;
+  onUploadPhoto: (file: File) => Promise<string>;
+  avatarUrl?: string | null;
   view: "profile" | "events";
   events: RegisteredEvent[];
   onShowEvents: () => void;
   onBackToProfile: () => void;
 }) {
   const [editing, setEditing] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(initialAvatarUrl || null);
   const [saved, setSaved] = useState(false);
   const profileComplete = Boolean(
     user.name.trim() && /^\d{10}$/.test(user.contactNumber.trim()) && user.department.trim() && user.year.trim() && user.rollNumber.trim(),
@@ -169,16 +173,20 @@ export default function ProfileCard({
 
   useEffect(() => {
     return () => {
-      if (avatarUrl) URL.revokeObjectURL(avatarUrl);
+      if (avatarUrl?.startsWith("blob:")) URL.revokeObjectURL(avatarUrl);
     };
   }, [avatarUrl]);
 
-  // Keep all persistence here so this local update can later be replaced with an API call.
-  const saveProfile = async (updatedUser: ProfileUser, avatarFile: File | null) => {
+  const saveProfile = async (updatedUser: ProfileUser) => {
     await onSaveUser(updatedUser);
-    if (avatarFile) setAvatarUrl(URL.createObjectURL(avatarFile));
     setSaved(true);
     setEditing(false);
+  };
+
+  const uploadPhoto = async (file: File) => {
+    const imageUrl = await onUploadPhoto(file);
+    setAvatarUrl(imageUrl);
+    return imageUrl;
   };
 
   return (
@@ -203,7 +211,7 @@ export default function ProfileCard({
               transition={{ duration: 0.24, ease: "easeOut" }}
             >
               {editing ? (
-                <ProfileEditForm user={user} avatarUrl={avatarUrl} onCancel={() => setEditing(false)} onSave={saveProfile} />
+                <ProfileEditForm user={user} avatarUrl={avatarUrl} onCancel={() => setEditing(false)} onSave={saveProfile} onUploadPhoto={uploadPhoto} />
               ) : (
                 <>
                   <ProfileCardHeader profileComplete={profileComplete} saved={saved} />
@@ -235,8 +243,8 @@ export default function ProfileCard({
                     <i className="fa-solid fa-chevron-right text-xs text-moon/40 transition-colors group-hover:text-vermilion" aria-hidden="true" />
                   </button>
                   <div className="border-t border-moon/10 pt-2">
-                    <button
-                      type="button"
+                    <a
+                      href="/auth/logout"
                       className="group flex w-full items-center gap-4 rounded-md px-3 py-3 text-left transition-colors duration-300 hover:bg-vermilion/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vermilion"
                     >
                       <i className="fa-solid fa-arrow-right-from-bracket text-lg text-vermilion" aria-hidden="true" />
@@ -245,7 +253,7 @@ export default function ProfileCard({
                         <span className="mt-1 block text-xs text-moon/50">Sign out of your participant account.</span>
                       </span>
                       <i className="fa-solid fa-chevron-right text-xs text-moon/40 transition-colors group-hover:text-vermilion" aria-hidden="true" />
-                    </button>
+                    </a>
                   </div>
                 </>
               )}

@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
-import { EVENT_GROUPS, events } from "@/data/events";
+import { useEffect, useState } from "react";
+import { getEvents, type ApiEvent } from "@/lib/api";
+import { EVENT_GROUPS } from "@/data/events";
 import SectionBackdrop from "../home/SectionBackdrop";
 import EventsHeader from "./EventsHeader";
 import { TEXT_OUTLINE_RED } from "../home/styles";
@@ -17,10 +19,14 @@ const readUrlGroup = () => {
 };
 
 export default function Events() {
+  const [events, setEvents] = useState<ApiEvent[]>([]);
+  const [loadError, setLoadError] = useState("");
+  useEffect(() => { getEvents().then(setEvents).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : "Events could not be loaded.")); }, []);
   const urlGroup = useSyncExternalStore(subscribeToNothing, readUrlGroup, () => null);
   const [chosen, setFilter] = useState<string | null>(null);
   const filter = chosen ?? urlGroup ?? "all";
-  const hide = (cat: string) => (filter === "all" || filter === cat ? "" : "hidden");
+  const category = (event: ApiEvent) => (event.catagory || "").toLowerCase().replace(/[^a-z]+/g, "-").replace(/^-|-$/g, "");
+  const visible = events.filter((event) => filter === "all" || category(event) === filter || category(event).includes(filter));
 
   return (
     <section id="events" className="relative overflow-clip bg-midnight py-24 md:py-32">
@@ -60,25 +66,25 @@ export default function Events() {
         </div>
 
         <div id="event-grid" className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-          {events.map((event, i) => (
+          {loadError ? <p role="alert" className="col-span-full py-8 text-center text-moon/70">{loadError}</p> : !events.length ? <p role="status" className="col-span-full py-8 text-center text-moon/70">Loading events…</p> : visible.length === 0 ? <p className="col-span-full py-8 text-center text-moon/70">No events in this category yet.</p> : visible.map((event, i) => (
             <Link
-              key={event.id}
-              href={`/events/${event.id}`}
-              className={`event-card js-reveal [&.is-in]:animate-reveal group flex flex-col border border-moon/15 bg-midnight/90 p-6 backdrop-blur-sm transition-colors duration-500 hover:border-vermilion/60 md:p-7 ${hide(event.group)}`}
+              key={event.event_id}
+              href={`/events/${event.event_id}`}
+              className="event-card js-reveal [&.is-in]:animate-reveal group flex flex-col border border-moon/15 bg-midnight/90 p-6 backdrop-blur-sm transition-colors duration-500 hover:border-vermilion/60 md:p-7"
             >
               <div className="flex items-start justify-between gap-4">
                 <span className={`font-display text-5xl leading-none ${TEXT_OUTLINE_RED}`}>{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-right font-nav text-[11px] font-bold uppercase tracking-[0.25em] text-amber">{event.type}</span>
+                <span className="text-right font-nav text-[11px] font-bold uppercase tracking-[0.25em] text-amber">{event.catagory || "EVENT"}</span>
               </div>
               <h3 className="mt-5 font-display text-3xl uppercase leading-[1.05] text-moon transition-colors group-hover:text-white">
-                {event.title}
+                {event.name || "Untitled event"}
               </h3>
-              <p className="mt-3 font-nav text-[11px] font-semibold uppercase tracking-[0.25em] text-sakura/80">{event.theme}</p>
-              <p className="mb-6 mt-4 text-sm leading-relaxed text-moon/75">{event.description}</p>
+              <p className="mt-3 font-nav text-[11px] font-semibold uppercase tracking-[0.25em] text-sakura/80">{event.is_team ? `TEAM · ${event.team_size ?? "Team"} participants` : "INDIVIDUAL EVENT"}</p>
+              <p className="mb-6 mt-4 text-sm leading-relaxed text-moon/75">{event.details || "Event details will be announced."}</p>
               <div className="mt-auto flex items-end justify-between border-t border-moon/15 pt-4 font-nav text-[11px] font-semibold tracking-[0.25em]">
                 <div>
                   <p className="text-mist">SCHEDULE</p>
-                  <p className="mt-1 text-moon">TBA</p>
+                  <p className="mt-1 text-moon">{event.date ? new Date(event.date).toLocaleDateString() : "TBA"}</p>
                 </div>
                 <span className="inline-flex items-center gap-3 font-bold text-moon transition-colors group-hover:text-vermilion">
                   DETAILS <i className="fa-solid fa-arrow-right-long text-[10px]"></i>

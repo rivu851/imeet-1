@@ -1,22 +1,35 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { EVENT_GROUPS, events } from "@/data/events";
+import { EVENT_GROUPS } from "@/data/events";
+import { getEvents } from "@/lib/api";
 import SectionBackdrop from "../home/SectionBackdrop";
 import EventsHeader from "./EventsHeader";
 
 /* The home page's short version of the events section: one card per category, each opening the full list. */
 export default function EventCategories() {
+  const [counts, setCounts] = useState<Record<string, number>>({});
+  const [loaded, setLoaded] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  useEffect(() => { getEvents().then((events) => {
+    const next: Record<string, number> = {};
+    for (const event of events) { const value = (event.catagory || "").toLowerCase(); const key = /technical/.test(value) && /non|non-/.test(value) ? "non-technical" : /technical|tech/.test(value) ? "technical" : /gam|sport/.test(value) ? "gaming" : "creative"; next[key] = (next[key] || 0) + 1; }
+    setCounts(next);
+  }).catch(() => { setCounts({}); setLoadError(true); }).finally(() => setLoaded(true)); }, []);
   return (
     <section id="events" className="relative overflow-clip bg-midnight py-24 md:py-32">
       <SectionBackdrop sticky src="/images/imeet/bg-event.webp" mobileSrc="/images/imeet/bg-event-mobile.webp" opacity={0.85} />
       <div data-petals="10" className="pointer-events-none absolute inset-0 overflow-hidden"></div>
       <div className="relative mx-auto w-full max-w-[1480px] px-6 md:px-10 lg:px-14">
-        <EventsHeader note={`${events.length} events across four categories. Schedules and registration details will be announced.`} />
+        <EventsHeader note={loaded ? `${Object.values(counts).reduce((sum, value) => sum + value, 0)} events. Schedules and registration details are listed on each event.` : "Loading event categories…"} />
+        {loadError && <p role="alert" className="mt-4 text-sm text-moon/70">Event categories are temporarily unavailable.</p>}
 
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
           {EVENT_GROUPS.map((group, i) => {
-            const count = events.filter((event) => event.group === group.id).length;
+            const count = counts[group.id] || 0;
             return (
               <Link
                 key={group.id}

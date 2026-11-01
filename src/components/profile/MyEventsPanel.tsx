@@ -34,9 +34,9 @@ function EventCard({ event }: { event: RegisteredEvent }) {
         </p>
       </div>
 
-      <p className="mt-4 border-t border-moon/10 pt-3 font-mono text-[10px] tracking-[0.12em] text-moon/45">
-        REGISTRATION ID <span className="ml-2 text-moon/75">{event.ticketId}</span>
-      </p>
+      {event.ticketId && <p className="mt-4 border-t border-moon/10 pt-3 font-mono text-[10px] tracking-[0.12em] text-moon/45">
+        TEAM NAME <span className="ml-2 text-moon/75">{event.ticketId}</span>
+      </p>}
     </article>
   );
 }

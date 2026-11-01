@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { PLACEHOLDER_USER } from "@/data/profileUser";
 
 const LINKS = [
   { href: "/", label: "HOME" },
@@ -18,6 +17,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [accountName, setAccountName] = useState("");
   const profileRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
@@ -34,6 +34,8 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => { fetch("/auth/status", { credentials: "same-origin", cache: "no-store" }).then((response) => response.json()).then((data) => { if (data?.auth === "confirmed") setAccountName(data.profile?.name || data.user?.name || data.user?.email || "Participant"); }).catch(() => {}); }, []);
 
   useEffect(() => {
     if (!profileOpen) return;
@@ -107,7 +109,7 @@ export default function Header() {
               type="button"
               onClick={() => setProfileOpen((open) => !open)}
               className="group flex size-10 items-center justify-center rounded-full border border-moon/25 bg-midnight/70 text-moon transition-all duration-300 hover:border-vermilion hover:text-vermilion hover:shadow-[0_0_16px_rgba(197,42,44,0.3)] lg:size-11"
-              aria-label={`Open profile menu for ${PLACEHOLDER_USER.name}`}
+              aria-label="Open participant account menu"
               aria-expanded={profileOpen}
               aria-haspopup="menu"
             >
@@ -125,11 +127,11 @@ export default function Header() {
                   </span>
                   <span className="min-w-0">
                     <span className="block truncate text-[10px] text-moon/60">Signed in as</span>
-                    <span className="block truncate text-[11px]">{PLACEHOLDER_USER.name}</span>
+                    <span className="block truncate text-[11px]">{accountName || "Guest"}</span>
                   </span>
                 </div>
                 <Link
-                  href="/profile"
+                  href={accountName ? "/profile" : "/auth/login?returnTo=%2Fprofile"}
                   role="menuitem"
                   onClick={() => { setProfileOpen(false); closeOnMobile(); }}
                   className="block px-3 py-3 transition-colors hover:bg-vermilion/10 hover:text-vermilion"
@@ -139,10 +141,10 @@ export default function Header() {
                 <button
                   type="button"
                   role="menuitem"
-                  onClick={() => setProfileOpen(false)}
+                  onClick={() => { setProfileOpen(false); window.location.assign(accountName ? "/auth/logout" : "/auth/login?returnTo=%2Fprofile"); }}
                   className="block w-full px-3 py-3 text-left text-vermilion/90 transition-colors hover:bg-vermilion/10 hover:text-vermilion"
                 >
-                  Logout
+                  {accountName ? "Logout" : "Sign in"}
                 </button>
               </div>
             )}
