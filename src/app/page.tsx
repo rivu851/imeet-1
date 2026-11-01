@@ -8,7 +8,6 @@ import Marquee from "@/components/home/Marquee";
 import Pillars from "@/components/home/Pillars";
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
-import RegisterSection from "@/components/signup/RegisterSection";
 
 export default function Home() {
   return (
@@ -26,7 +25,6 @@ export default function Home() {
         <EventCategories />
         <Pillars />
         <Countdown />
-        <RegisterSection />
       </main>
       <Footer />
       <Effects />

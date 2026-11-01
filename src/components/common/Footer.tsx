@@ -6,7 +6,6 @@ const EXPLORE = [
   { href: "/teams", label: "Teams" },
   { href: "/events", label: "Events" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/signup", label: "Sign Up" },
 ];
 
 const CONNECT = [

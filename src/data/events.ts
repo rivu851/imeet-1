@@ -13,20 +13,20 @@ export const EVENT_GROUPS: { id: EventGroup; label: string; title: string; summa
     label: "NON-TECHNICAL",
     title: "Non-Technical",
     summary: "A pop-culture fandom quiz for those who know their favourite worlds inside out.",
-    image: "/images/events/courtyard.jpg",
+    image: "/images/imeet/Moonlit Sakura Poster-Making Festival.png",
   },
   {
     id: "gaming",
     label: "GAMING",
     title: "Gaming",
     summary: "FIFA 23, eFootball and BGMI, for those who play to win.",
-    image: "/images/imeet/torii.jpg",
+    image: "/images/events/Neon Anime Gaming Squad (1).png",
   },
   {
     id: "creative",
     label: "CREATIVE / SHOWCASE",
     title: "Creative / Showcase",
     summary: "Photography, poster making and a startup pitchathon.",
-    image: "/images/imeet/lanterns.jpg",
+    image: "/images/events/Anime Project Showcase Under Comet Skies.png",
   },
 ];
