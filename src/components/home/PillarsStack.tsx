@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
@@ -18,8 +16,9 @@ const PILLARS = [
     body: "Celebrate curiosity, creative thinking, and the exchange of ideas.",
     tags: ["CURIOSITY", "CREATIVITY", "DIALOGUE"],
     scene: "SCENE 02 · THE SPARK",
-    img: "/images/imeet/lanterns.jpg",
-    alt: "Paper lanterns and fireflies rising over moonlit grass",
+    img: "/images/imeet/inspire-bg.webp",
+    mobileImg: "/images/imeet/inspire-bg-mobile.webp",
+    alt: "Atmospheric scene representing inspiration",
     imgPosition: "object-[50%_40%]",
   },
   {
@@ -32,8 +31,9 @@ const PILLARS = [
     body: "Explore technology, engineering, programming, and original solutions.",
     tags: ["TECHNOLOGY", "ENGINEERING", "PROGRAMMING"],
     scene: "SCENE 03 · THE FORGE OF IDEAS",
-    img: "/images/imeet/forge.jpg",
-    alt: "A swordsmith's forge glowing with embers at night",
+    img: "/images/imeet/innovate-bg.webp",
+    mobileImg: "/images/imeet/innovate-bg-mobile.webp",
+    alt: "Atmospheric scene representing innovation",
     imgPosition: "object-center",
   },
   {
@@ -46,8 +46,9 @@ const PILLARS = [
     body: "Transform collaboration and experimentation into meaningful outcomes.",
     tags: ["COLLABORATION", "EXPERIMENT", "OUTCOME"],
     scene: "SCENE 04 · THE RIPPLE THAT REMAINS",
-    img: "/images/imeet/torii.jpg",
-    alt: "A crimson torii gate standing in a moonlit misty lake with spreading ripples",
+    img: "/images/imeet/impact-bg.webp",
+    mobileImg: "/images/imeet/impact-bg-mobile.webp",
+    alt: "Atmospheric scene representing meaningful impact",
     imgPosition: "object-[60%_50%]",
   },
 ];
@@ -251,11 +252,14 @@ export default function PillarsStack() {
               onPointerLeave={onCardLeave}
               className="group relative h-full w-full"
             >
-              <img
-                src={p.img}
-                alt={p.alt}
-                className={`absolute inset-0 h-full w-full scale-[1.08] object-cover transition-transform duration-700 ease-out [translate:var(--dx,0px)_var(--dy,0px)] group-hover:scale-[1.12] ${p.imgPosition}`}
-              />
+              <picture className="absolute inset-0 block h-full w-full">
+                {p.mobileImg && <source media="(max-width: 767px)" srcSet={p.mobileImg} />}
+                <img
+                  src={p.img}
+                  alt={p.alt}
+                  className={`h-full w-full scale-[1.08] object-cover transition-transform duration-700 ease-out [translate:var(--dx,0px)_var(--dy,0px)] group-hover:scale-[1.12] ${p.imgPosition}`}
+                />
+              </picture>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-midnight/95 via-midnight/60 to-midnight/10"></div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent"></div>
               <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 [background:radial-gradient(420px_circle_at_var(--mx,50%)_var(--my,50%),rgba(220,229,241,0.12),rgba(197,42,44,0.08)_40%,transparent_70%)] group-hover:opacity-100"></div>

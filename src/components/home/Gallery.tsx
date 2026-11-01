@@ -26,11 +26,27 @@ export default function Gallery() {
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
   const touchStartX = useRef<number | null>(null);
 
-  useEffect(() => { apiRequest<{ data: ApiGalleryItem[] }>("/api/gallery").then(({ data }) => {
-    const items = (data || []).map((item) => ({ id: item.id, src: item.image_url_large || item.image_url, alt: item.caption || item.title, title: item.title, year: String(item.year) as "2026", w: 1200, h: 850, group: /2|prize|closing/i.test(item.category) ? "day-2" : "day-1", featured: true, position: "50% 50%" }));
-    setGalleryItems(items);
-    setLightboxItems(items);
-  }).catch((error: unknown) => setGalleryError(error instanceof Error ? error.message : "Gallery could not be loaded.")).finally(() => setLoading(false)); }, []);
+  useEffect(() => {
+    apiRequest<{ data: ApiGalleryItem[] }>("/api/gallery")
+      .then(({ data }) => {
+        const items = (data || []).map((item) => ({
+          id: item.id,
+          src: item.image_url_large || item.image_url,
+          alt: item.caption || item.title,
+          title: item.title,
+          year: String(item.year) as "2026",
+          w: 1200,
+          h: 850,
+          group: /2|prize|closing/i.test(item.category) ? "day-2" : "day-1",
+          featured: true,
+          position: "50% 50%",
+        }));
+        setGalleryItems(items);
+        setLightboxItems(items);
+      })
+      .catch((error: unknown) => setGalleryError(error instanceof Error ? error.message : "Gallery could not be loaded."))
+      .finally(() => setLoading(false));
+  }, []);
 
   const registerTile = (item: GalleryItem, element: HTMLButtonElement | null) => {
     if (element) tileRefs.current.set(item.id, element);
@@ -120,10 +136,9 @@ export default function Gallery() {
     if (Math.abs(distance) >= 50) move(distance < 0 ? 1 : -1);
   };
 
-  const emptyItem: GalleryItem = { id: "", src: "", alt: "", title: "", year: "2026", w: 1, h: 1, group: "", featured: false, position: "50% 50%" };
-  const current = open === null ? lightboxItems[0] ?? emptyItem : lightboxItems[open] ?? emptyItem;
-  const previous = lightboxItems.length ? lightboxItems[wrap((open ?? 0) - 1, lightboxItems)] : emptyItem;
-  const next = lightboxItems.length ? lightboxItems[wrap((open ?? 0) + 1, lightboxItems)] : emptyItem;
+  const current = open === null ? lightboxItems[0] : lightboxItems[open];
+  const previous = lightboxItems.length ? lightboxItems[wrap((open ?? 0) - 1, lightboxItems)] : undefined;
+  const next = lightboxItems.length ? lightboxItems[wrap((open ?? 0) + 1, lightboxItems)] : undefined;
   const visibleGroups = activeGroup ? groups.filter((group) => group.id === activeGroup) : groups;
   const archiveItemsForGroup = (groupId: string) => galleryItems.filter((item) => item.group === groupId);
   const visibleArchiveItems = visibleGroups.flatMap((group) => archiveItemsForGroup(group.id).slice(0, visibleCounts[group.id] ?? 12));
@@ -221,14 +236,18 @@ export default function Gallery() {
           <i className="fa-solid fa-arrow-right-long text-sm"></i>
         </button>
         <figure className="flex max-w-6xl flex-col items-center">
-          <img id="lb-img" src={current.src} alt={current.alt} className="max-h-[78vh] w-auto object-contain" style={{ objectPosition: current.position }} />
-          <figcaption id="lb-cap" className="mt-5 text-center font-nav text-xs font-semibold uppercase tracking-[0.3em] text-moon/70">
-            <span className="block text-amber">{open === null ? "01 / 06" : `${String(open + 1).padStart(2, "0")} / ${String(lightboxItems.length).padStart(2, "0")}`}</span>
-            <span className="mt-2 block text-moon">{current.title} · {current.year}</span>
-          </figcaption>
+          {current && (
+            <>
+              <img id="lb-img" src={current.src} alt={current.alt} className="max-h-[78vh] w-auto object-contain" style={{ objectPosition: current.position }} />
+              <figcaption id="lb-cap" className="mt-5 text-center font-nav text-xs font-semibold uppercase tracking-[0.3em] text-moon/70">
+                <span className="block text-amber">{open === null ? "01 / 06" : `${String(open + 1).padStart(2, "0")} / ${String(lightboxItems.length).padStart(2, "0")}`}</span>
+                <span className="mt-2 block text-moon">{current.title} · {current.year}</span>
+              </figcaption>
+            </>
+          )}
         </figure>
-        <img src={previous.src} alt="" aria-hidden="true" className="hidden" />
-        <img src={next.src} alt="" aria-hidden="true" className="hidden" />
+        {previous && <img src={previous.src} alt="" aria-hidden="true" className="hidden" />}
+        {next && <img src={next.src} alt="" aria-hidden="true" className="hidden" />}
       </div>
     </>
   );
